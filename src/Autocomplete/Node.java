@@ -1,7 +1,12 @@
 package Autocomplete;
 
+import java.util.*;
 
 public class Node extends Tree{
-	protected Node[] parents = new Node[6]; 
+	public ArrayList<ArrayList<Node>> parents = new ArrayList<ArrayList<Node>>();
+	public ArrayList<ArrayList<Node>> children = new ArrayList<ArrayList<Node>>();
+	public String content;
+	public Boolean isWord;
+	
 	
 }
