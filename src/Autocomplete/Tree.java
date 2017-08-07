@@ -31,5 +31,19 @@ public class Tree extends Main{
 //	public ArrayList<Node> onion(ArrayList<Node> a, ArrayList<Node> b){
 //		//union
 //	}
+	//@SuppressWarnings("static-access")
+	public void construct(Boolean isChar){
+		if (isChar){
+			
+		}
+		if (!isChar){
+			for (int word = 0;word<trainingData.size()-super.n;word++){
+				for(int gram = 0;gram<super.n;gram++){
+					System.out.print(trainingData.get(word+gram)+ "-");
+				}
+				System.out.println("");
+			}
+		}
+	}
 }
 

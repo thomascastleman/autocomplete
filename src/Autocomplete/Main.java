@@ -10,33 +10,39 @@ import java.util.*;
 
 
 public class Main{
+	public int n = 3;
 	public static void main(String[] args) {
+		
 		Tree wordTree = new Tree();
 		Tree charTree = new Tree();
-		loadData("beeMovie.txt", wordTree);
-		System.out.print(wordTree.trainingData);
+		wordTree.trainingData = loadData("beeMovie.txt");
+		//wordTree.construct(false);
+		
+		//System.out.print(wordTree.trainingData);
 		
 	}
 	public static void save(){
 		
 	}
 	
-	public static ArrayList<String> loadData(String file, Tree tree){
+	public static ArrayList<String> loadData(String file){
 		String line = null;
+		String total = "";
+		
 		ArrayList<String> d = new ArrayList<String>();
 		try {
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
-			while((line = bufferedReader.readLine()) != null) {
-				String[] s = line.split(" ");
-				
-				for (int i = 0; i<s.length;i++){
-					d.add(s[i]);
-				}
+			while((line = bufferedReader.readLine()) != null) { 
+				total = total+" "+line;
 			}
+				
+				total = total.replaceAll("\\s\\s", " ");
+				total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
+				String[] sentences = total.split(".");
+				System.out.println(total);
 				bufferedReader.close();
-				tree.trainingData = d;
 				return d;
 			}
 		
@@ -53,6 +59,8 @@ public class Main{
 		}
 		return d;
 	}
+	
+	
 }
 	
 
