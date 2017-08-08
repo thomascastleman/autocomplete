@@ -12,7 +12,7 @@ public class Tree extends Main{
 
 		
 	}
-	
+
 //	public ArrayList<Node> charSearch(String s){
 // 
 //	}
@@ -21,15 +21,15 @@ public class Tree extends Main{
 //		
 //	}
 //
-//	public ArrayList<Node> intersect(ArrayList<Node> a, ArrayList<Node> b){
+//	public ArrayList<Node> intersect(HashMap<Node, Integer> a, HashMap<Node, Integer> b){
 //		
 //	}
 //	
-//	public ArrayList<Node> relativeComplement(ArrayList<Node> a, ArrayList<Node> b){
+//	public ArrayList<Node> relativeComplement(HashMap<Node, Integer> a, HashMap<Node, Integer> b){
 //		
 //	}
 //	
-//	public ArrayList<Node> onion(ArrayList<Node> a, ArrayList<Node> b){
+//	public ArrayList<Node> onion(HashMap<Node, Integer> a, HashMap<Node, Integer> b){
 //		//union
 //	}
 	//@SuppressWarnings("static-access")
