@@ -13,8 +13,4 @@ public abstract class Node extends Tree {
 		this.isChar = isChar_;
 		
 	}
-	
-	public Node() {
-		
-	}
 }
