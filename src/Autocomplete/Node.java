@@ -18,5 +18,3 @@ public abstract class Node extends Tree {
 		
 	}
 }
-
-//

@@ -8,7 +8,6 @@ import java.util.*;
 
 
 
-
 public class Main{
 	public int n = 3;
 	public static void main(String[] args) {
@@ -47,14 +46,10 @@ public class Main{
 			}
 		
 		catch(FileNotFoundException ex) {
-			System.out.println(
-					"Unable to open file '" + 
-							file + "'");
+			System.out.println("Unable to open file '" + file + "'");
 		}
 		catch(IOException ex) {
-			System.out.println(
-					"Error reading file '" 
-							+ file + "'");
+			System.out.println("Error reading file '" + file + "'");
 		
 		}
 		return d;

@@ -12,6 +12,7 @@ public class Tree extends Main{
 
 		
 	}
+	
 //	public ArrayList<Node> charSearch(String s){
 // 
 //	}
@@ -37,9 +38,9 @@ public class Tree extends Main{
 			
 		}
 		if (!isChar){
-			for (int word = 0;word<trainingData.size()-super.n;word++){
-				for(int gram = 0;gram<super.n;gram++){
-					System.out.print(trainingData.get(word+gram)+ "-");
+			for (int word = 0; word<trainingData.size() - super.n; word++){
+				for(int gram = 0; gram < super.n; gram++){
+					System.out.print(trainingData.get(word + gram) + "-");
 				}
 				System.out.println("");
 			}
