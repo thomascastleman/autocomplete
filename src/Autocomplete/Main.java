@@ -26,9 +26,9 @@ public class Main{
 		
 	}
 
-	public static String findCompletion(String[] error) {
-
-	}
+//	public static String findCompletion(String[] error) {
+//
+//	}
 
 	public static void save() {
 		
@@ -42,7 +42,7 @@ public class Main{
 		try {
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader =  new BufferedReader(fileReader);
-
+			
 			while((line = bufferedReader.readLine()) != null) { 
 				total = total+" "+line;
 			}

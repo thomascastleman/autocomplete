@@ -29,8 +29,8 @@ public class Tree extends Main{
 					break;
 
 				// if child found, move to that node	
-				} else if (n.children.get(child).content == s.charAt(c)) {	
-					n = n.children.get(child);
+//				} else if (((CharNode) n.children.get(child))).equals(s.charAt(c))) {	
+//					n = n.children.get(child);
 					break;
 				}
 			}
