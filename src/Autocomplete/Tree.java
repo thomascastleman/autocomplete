@@ -100,8 +100,14 @@ public class Tree extends Main{
 
 	//@SuppressWarnings("static-access")
 	public void construct(Boolean isChar){
+		// check if tree files exist
+		// if yes, reconstruct from those
+		// else:
+
+		// character tree
 		if (isChar){
-			
+		
+		// word tree
 		} else {
 			for (int word = 0; word < trainingData.size() - super.n; word++){
 				for(int gram = 0; gram < super.n; gram++){
@@ -109,6 +115,26 @@ public class Tree extends Main{
 				}
 				System.out.println("");
 			}
+		}
+	}
+
+	// write entire tree structure to txt file for later reconstruction
+	public void writeToFile() {
+		// open file here
+
+		dfs(this.origin);
+
+		// close file
+	}
+
+	public void dfs(Node n) {
+		for (int i = 0; i < n.children.size(); i++) {
+			
+			// Write (n.children.get(i).content + " " + n.children.get(i).probability + "\n") to file
+			
+			dfs(n.children.get(i));
+			
+			// Write "u" to file
 		}
 	}
 }
