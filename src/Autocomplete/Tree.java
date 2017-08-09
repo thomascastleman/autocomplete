@@ -10,7 +10,7 @@ public class Tree extends Main{
 	
 	public  Tree(){
 
-		
+
 	}
 
 	// search character tree for possible completions of a given string
@@ -102,8 +102,7 @@ public class Tree extends Main{
 	public void construct(Boolean isChar){
 		if (isChar){
 			
-		}
-		if (!isChar){
+		} else {
 			for (int word = 0; word < trainingData.size() - super.n; word++){
 				for(int gram = 0; gram < super.n; gram++){
 					System.out.print(trainingData.get(word + gram) + "-");

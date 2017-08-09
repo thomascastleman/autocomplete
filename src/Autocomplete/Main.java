@@ -14,7 +14,7 @@ public class Main{
 	// all possible completions found from searching word and char trees
 	public ArrayList<Node> completionsFromWordSearch = new ArrayList<Node>();
 	public ArrayList<Node> completionsFromCharSearch = new ArrayList<Node>();
-	
+
 	public static void main(String[] args) {
 		
 		Tree wordTree = new Tree();
@@ -30,7 +30,7 @@ public class Main{
 
 	}
 
-	public static void save(){
+	public static void save() {
 		
 	}
 	
