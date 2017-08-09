@@ -29,9 +29,9 @@ public class Tree extends Main{
 					break;
 
 				// if child found, move to that node	
-//				} else if (((CharNode) n.children.get(child))).equals(s.charAt(c))) {	
-//					n = n.children.get(child);
-					break;
+				} else if (((CharNode) n.children.get(child)).equals(s.charAt(c))) {	
+					n = n.children.get(child);
+					//break;
 				}
 			}
 
@@ -70,7 +70,7 @@ public class Tree extends Main{
 					break;
 
 				// if child found, move to that node	
-				} else if (n.children.get(child).content.equals(ngram[word])) {	
+				} else if (((WordNode) n.children.get(child)).equals(ngram[child])) {						
 					n = n.children.get(child);
 					break;
 				}
