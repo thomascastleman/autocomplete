@@ -7,10 +7,6 @@ public class Tree extends Main{
 	Node origin = null;
 	public ArrayList<ArrayList<Node>> layers = new ArrayList<ArrayList<Node>>();
 	public ArrayList<String> trainingData = new ArrayList<String>();
-
-	// all possible completions found from searching word and char trees
-	public ArrayList<Node> completionsFromWordSearch = new ArrayList<Node>();
-	public ArrayList<Node> completionsFromCharSearch = new ArrayList<Node>();
 	
 	public  Tree(){
 
@@ -28,7 +24,7 @@ public class Tree extends Main{
 			for (int child = 0; child <= n.children.size(); child++) {
 
 				// if no matching children found, break
-				if (child = n.children.size()) {
+				if (child == n.children.size()) {
 					lowestNodeFound = true;
 					break;
 
@@ -52,17 +48,43 @@ public class Tree extends Main{
 	public void searchCompletedChildren(Node n) {
 		for (int i = 0; i < n.children.size(); i++) {
 			if (((CharNode) n.children.get(i)).isWord) {
-				completionsFromCharSearch.add(n.children.get(i));
+				super.completionsFromCharSearch.add(n.children.get(i));
 			}
 			searchCompletedChildren(n.children.get(i));
 		}
 	}
 
-//	
-//	public ArrayList<Node> wordSearch(String s){
-//		
-//	}
-//
+	// search word tree for possible completions of a given ngram
+	public ArrayList<Node> wordSearch(String[] ngram){
+		Node n = origin;
+		boolean lowestNodeFound = false;
+
+		// for every word in ngram
+		for (int word = 0; word < ngram.length; word++) {
+			// for every child of corresponding node for current character
+			for (int child = 0; child <= n.children.size(); child++) {
+
+				// if no matching children found, break
+				if (child == n.children.size()) {
+					lowestNodeFound = true;
+					break;
+
+				// if child found, move to that node	
+				} else if (n.children.get(child).content.equals(ngram[word])) {	
+					n = n.children.get(child);
+					break;
+				}
+			}
+
+			if (lowestNodeFound) {
+				break;
+			}
+		}
+
+		// return all children of ngram
+		return n.children;
+	}
+
 //	public ArrayList<Node> intersect(ArrayList<Node> a, ArrayList<Node> b){
 //		
 //	}
@@ -74,6 +96,8 @@ public class Tree extends Main{
 //	public ArrayList<Node> onion(ArrayList<Node> a, ArrayList<Node> b){
 //		//union
 //	}
+
+
 	//@SuppressWarnings("static-access")
 	public void construct(Boolean isChar){
 		if (isChar){

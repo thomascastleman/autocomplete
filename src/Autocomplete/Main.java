@@ -10,6 +10,11 @@ import java.util.*;
 
 public class Main{
 	public int n = 3;
+
+	// all possible completions found from searching word and char trees
+	public ArrayList<Node> completionsFromWordSearch = new ArrayList<Node>();
+	public ArrayList<Node> completionsFromCharSearch = new ArrayList<Node>();
+	
 	public static void main(String[] args) {
 		
 		Tree wordTree = new Tree();
@@ -20,6 +25,11 @@ public class Main{
 		//System.out.print(wordTree.trainingData);
 		
 	}
+
+	public static String findCompletion(String[] error) {
+
+	}
+
 	public static void save(){
 		
 	}
