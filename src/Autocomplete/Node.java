@@ -4,8 +4,8 @@ import java.util.*;
 
 public abstract class Node extends Tree {
 	
-	public ArrayList<ArrayList<Node>> parents = new ArrayList<ArrayList<Node>>();
-	public ArrayList<ArrayList<Node>> children = new ArrayList<ArrayList<Node>>();
+	public ArrayList<Node> parents = new ArrayList<Node>();
+	public ArrayList<Node> children = new ArrayList<Node>();
 	public int probability;
 	public boolean isChar;
 	
