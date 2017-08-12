@@ -18,7 +18,7 @@ public class Tree extends Main{
 		
 		
 	}
-
+/*
 	// search character tree for possible completions of a given string
 	public void charSearch(String s){
 	
@@ -36,10 +36,10 @@ public class Tree extends Main{
 					break;
 
 				// if child found, move to that node	
-				} else if (((CharNode) n.children.get(child)).equals(s.charAt(c))) {	
-					n = n.children.get(child);
-					//break;
-				}
+//				} else if (((CharNode) n.children.get(child)).equals(s.charAt(c))) {	
+//					n = n.children.get(child);
+//					//break;
+//				}
 			}
 
 			if (lowestNodeFound) {
@@ -47,21 +47,23 @@ public class Tree extends Main{
 			}
 		}
 
-		// search for all completed children of lowest found node
-		searchCompletedChildren(n);
-	}
+*/
+	// search for all completed children of lowest found node
+		//searchCompletedChildren(n);
+	
 
 	// depth first search from given node to find every completed-word child beneath it
 	public void searchCompletedChildren(Node n) {
 		for (int i = 0; i < n.children.size(); i++) {
-			if (((CharNode) n.children.get(i)).isWord) {
-				super.completionsFromCharSearch.add(n.children.get(i));
-			}
+//			if (((CharNode) n.children.get(i)).isWord) {
+//				super.completionsFromCharSearch.add(n.children.get(i));
+//			}
 			searchCompletedChildren(n.children.get(i));
 		}
 	}
 
 	// search word tree for possible completions of a given ngram
+	/*
 	public ArrayList<Node> wordSearch(String[] ngram){
 		Node n = origin;
 		boolean lowestNodeFound = false;
@@ -91,7 +93,8 @@ public class Tree extends Main{
 		// return all children of ngram
 		return n.children;
 	}
-
+*/
+	
 //	public ArrayList<Node> intersect(ArrayList<Node> a, ArrayList<Node> b){
 //		
 //	}

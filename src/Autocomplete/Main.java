@@ -18,8 +18,8 @@ public class Main{
 	public enum TreeType{WORDTREE,CHARTREE};
 	String trainingData;
 	String file = "null";
-	FileReader fileReader;
-	BufferedReader bufferedReader =  new BufferedReader(fileReader);
+	//FileReader fileReader;
+	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
 
 	public static void main(String[] args) {
