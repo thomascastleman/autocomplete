@@ -94,19 +94,6 @@ public class Tree extends Main{
 		return n.children;
 	}
 */
-	
-//	public ArrayList<Node> intersect(ArrayList<Node> a, ArrayList<Node> b){
-//		
-//	}
-//	
-//	public ArrayList<Node> relativeComplement(ArrayList<Node> a, ArrayList<Node> b){
-//		
-//	}
-//	
-//	public ArrayList<Node> onion(ArrayList<Node> a, ArrayList<Node> b){
-//		//union
-//	}
-
 
 	//@SuppressWarnings("static-access")
 	public void construct(Boolean isChar){
