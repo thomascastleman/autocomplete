@@ -7,7 +7,6 @@ try{
 Connection con=DriverManager.getConnection(  
 "jdbc:mysql://box1275.bluehost.com:3306/jlindber_autocomplete","jlindber_public","Gnx-H7G-BBf-gdk");  
 System.out.println("x");
-//here sonoo is database name, root is username and password  
 Statement stmt=con.createStatement();  
 ResultSet rs=stmt.executeQuery("SELECT * from test");  
 while(rs.next())  
