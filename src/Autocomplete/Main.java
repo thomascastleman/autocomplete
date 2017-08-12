@@ -14,12 +14,19 @@ public class Main{
 	// all possible completions found from searching word and char trees
 	public ArrayList<Node> completionsFromWordSearch = new ArrayList<Node>();
 	public ArrayList<Node> completionsFromCharSearch = new ArrayList<Node>();
+	public Scanner input = new Scanner(System.in);
+	public enum TreeType{WORDTREE,CHARTREE};
+	String trainingData;
+	String file = "null";
+	//FileReader fileReader;
+	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
+
 
 	public static void main(String[] args) {
 		
-		Tree wordTree = new Tree();
-		Tree charTree = new Tree();
-		wordTree.trainingData = loadData("beeMovie.txt");
+		Tree wordTree = new Tree(TreeType.WORDTREE);
+		Tree charTree = new Tree(TreeType.CHARTREE);
+		
 		//wordTree.construct(false);
 		
 		//System.out.print(wordTree.trainingData);

@@ -2,15 +2,20 @@ package Autocomplete;
 
 import java.util.*;
 
-public abstract class Node extends Tree {
+public class Node extends Tree {
 	
-	public ArrayList<Node> parents = new ArrayList<Node>();
+//	public Node parent = new Node();
+	public int id;
 	public ArrayList<Node> children = new ArrayList<Node>();
 	public int probability;
-	public boolean isChar;
+	protected String content;
+	public boolean isWord;
+
 	
-	public Node(boolean isChar_) {
-		this.isChar = isChar_;
-		
+	public Node(int id, int probability, String content, boolean isWord) {
+		this.id = id;
+		this.probability = probability;
+		this.content = content;
+		this.isWord = isWord;
 	}
 }
