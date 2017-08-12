@@ -1,3 +1,4 @@
 # autocomplete
 
-![img](http://latex.codecogs.com/gif.latex?f(\varphi)%20=%20\cases{\varphi\in\mathcal{D},%20&%20\text{%20}%20\varphi%20\cr%20\varphi\notin\mathcal{D},%20&%20\text{%20}%20([s(\varphi_{m-1},T_{w})]%20\bigcap%20[s(\varphi_{m-1},T_{c})])%20\bigcup%20([s(\varphi_{m-1},T_{c})]%20\diagdown%20([s(\varphi_{m-1},T_{w})]%20\bigcap%20[s(\varphi_{m-1},T_{c})])%20)%20%20})
+![img](http://latex.codecogs.com/gif.latex?f(\varphi) = \left. \begin{cases} (S_c \bigcap S_w) \bigcup (S_c\diagdown( S_c \bigcap S_w)), & \text{for }  \varphi_{m-1}\notin\mathcal{D} \\ \O}, & \text{for \varphi_{m-1}\in\mathcal{D}\end{cases}\right\}
+
