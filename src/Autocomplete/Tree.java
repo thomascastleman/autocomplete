@@ -3,18 +3,25 @@ package Autocomplete;
 import java.util.*;
 
 
+
 public class Tree extends Main{
 	Node origin = null;
 	public ArrayList<ArrayList<Node>> layers = new ArrayList<ArrayList<Node>>();
 	public ArrayList<String> trainingData = new ArrayList<String>();
+	TreeType type;
 	
-	public  Tree(){
-
-
+	public Tree(TreeType t){
+		this.type = t;
+		
+	}
+	public Tree(){
+		
+		
 	}
 
 	// search character tree for possible completions of a given string
 	public void charSearch(String s){
+	
 		Node n = origin;
 		boolean lowestNodeFound = false;
 
@@ -122,17 +129,18 @@ public class Tree extends Main{
 	public void writeToFile() {
 		// open file here
 
-		dfs(this.origin);
+		this.dfs(this.origin);
 
 		// close file
 	}
 
 	public void dfs(Node n) {
+		
 		for (int i = 0; i < n.children.size(); i++) {
 			
 			// Write (n.children.get(i).content + " " + n.children.get(i).probability + "\n") to file
 			
-			dfs(n.children.get(i));
+			this.dfs(n.children.get(i));
 			
 			// Write "u" to file
 		}
