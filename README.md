@@ -1,4 +1,4 @@
 # autocomplete
 
 
-![alt text](https://raw.githubusercontent.com/thomascastleman/autocomplete/master/autocompleteEquation.png)
+![alt text](https://raw.githubusercontent.com/thomascastleman/autocomplete/master/autocomplete.png)
