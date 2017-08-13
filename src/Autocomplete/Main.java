@@ -18,6 +18,9 @@ public class Main{
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
 	String file = "null";
+	public static Tree wordTree = new Tree(TreeType.WORDTREE);
+	public static Tree charTree = new Tree(TreeType.CHARTREE);
+
 	//FileReader fileReader;
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
@@ -26,10 +29,8 @@ public class Main{
 
 	public static void main(String[] args) {
 		// dictionary = readInDictionary("dictionary.txt");
-		rawTrainingData = readInRawData("beeMovie.txt");
+		// rawTrainingData = readInRawData("beeMovie.txt");
 		
-		Tree wordTree = new Tree(TreeType.WORDTREE);
-		Tree charTree = new Tree(TreeType.CHARTREE);
 		
 	}
 
@@ -50,32 +51,32 @@ public class Main{
 	// 	//union
 	// }
 
-	// read in training data as single string
-	public static String readInRawData(String file) {
-		String line = null;
-		String total = "";
+	// // read in training data as single string
+	// public static String readInRawData(String file) {
+	// 	String line = null;
+	// 	String total = "";
 
-		try {
-			FileReader fileReader = new FileReader(file);
-			BufferedReader bufferedReader =  new BufferedReader(fileReader);
+	// 	try {
+	// 		FileReader fileReader = new FileReader(file);
+	// 		BufferedReader bufferedReader =  new BufferedReader(fileReader);
 			
-			while ((line = bufferedReader.readLine()) != null) { 
-				total = total + " " + line;
-			}
+	// 		while ((line = bufferedReader.readLine()) != null) { 
+	// 			total = total + " " + line;
+	// 		}
 
-			total = total.replaceAll("\\s\\s", " ");
-			total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
+	// 		total = total.replaceAll("\\s\\s", " ");
+	// 		total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
 
-			bufferedReader.close();
-		}
+	// 		bufferedReader.close();
+	// 	}
 		
-		catch(FileNotFoundException ex) {
-			System.out.println("Unable to open file '" + file + "'");
-		}
-		catch(IOException ex) {
-			System.out.println("Error reading file '" + file + "'");
-		}
-	}
+	// 	catch(FileNotFoundException ex) {
+	// 		System.out.println("Unable to open file '" + file + "'");
+	// 	}
+	// 	catch(IOException ex) {
+	// 		System.out.println("Error reading file '" + file + "'");
+	// 	}
+	// }
 
 	public static ArrayList<ArrayList<String>> readInDictionary(String file) {
 		String line = null;
