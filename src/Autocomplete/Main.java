@@ -21,6 +21,7 @@ public class Main{
 
 
 	public static void main(String[] args) {
+		rawTrainingData = readInRawData("beeMovie.txt");
 		
 		Tree wordTree = new Tree(TreeType.WORDTREE);
 		Tree charTree = new Tree(TreeType.CHARTREE);
@@ -43,39 +44,31 @@ public class Main{
 	// public ArrayList<Node> onion(ArrayList<Node> a, ArrayList<Node> b){
 	// 	//union
 	// }
-	
-	// public static ArrayList<String> loadData(String file){
-	// 	String line = null;
-	// 	String total = "";
-		
-	// 	ArrayList<String> d = new ArrayList<String>();
-	// 	try {
-	// 		FileReader fileReader = new FileReader(file);
-	// 		BufferedReader bufferedReader =  new BufferedReader(fileReader);
-			
-	// 		while((line = bufferedReader.readLine()) != null) { 
-	// 			total = total+" "+line;
-	// 		}
-				
-	// 			total = total.replaceAll("\\s\\s", " ");
-	// 			total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
-	// 			String[] sentences = total.split(".");
-	// 			System.out.println(total);
-	// 			bufferedReader.close();
-	// 			return d;
-	// 		}
-		
-	// 	catch(FileNotFoundException ex) {
-	// 		System.out.println("Unable to open file '" + file + "'");
-	// 	}
-	// 	catch(IOException ex) {
-	// 		System.out.println("Error reading file '" + file + "'");
-		
-	// 	}
-	// 	return d;
-	// }
-	
-	
-}
-	
 
+	// read in training data as single string
+	public static String readInRawData(String file) {
+		String line = null;
+		String total = "";
+
+		try {
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader =  new BufferedReader(fileReader);
+			
+			while((line = bufferedReader.readLine()) != null) { 
+				total = total + " " + line;
+			}
+
+			total = total.replaceAll("\\s\\s", " ");
+			total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
+
+			bufferedReader.close();
+		}
+		
+		catch(FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + file + "'");
+		}
+		catch(IOException ex) {
+			System.out.println("Error reading file '" + file + "'");
+		}
+	}	
+}
