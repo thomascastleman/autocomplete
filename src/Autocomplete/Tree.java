@@ -37,34 +37,37 @@ public class Tree extends Main {
 	// }
 
 	// format raw training data into 2 dimensional string array (words for chartree, clauses and words for wordtree)
-	public String[][] formatData(String trainingData) {
+	public ArrayList<ArrayList<String>> formatData(String trainingData) {
+
+		ArrayList<ArrayList<String>> formatted = new ArrayList<ArrayList<String>>();
+
 		if (this.type == TreeType.CHARTREE) {
 			String[] temp = trainingData.split(" ");
-			String[][] formatted = new String[temp.length][1];
 
 			for (int i = 0; i < temp.length; i++) {
-				formatted[i][0] = temp[i].replaceAll("\\W", "");
+				formatted.add(new ArrayList<String>());
 			}
+
+			for (int i = 0; i < temp.length; i++) {
+				formatted.get(i).add(temp[i].replaceAll("\\W", ""));
+			}
+
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
 			String[] clauses = trainingData.split("\\.|\\,");
 
-			String[][] formatted;
-
 			for (int c = 0; c < clauses.length; c++) {
-				formatted[c] = clauses[c].split(" ");
+				formatted.add(new ArrayList<String>());
+				formatted.get(c).addAll(Arrays.asList(clauses[c].split(" ")));
 			}
-
-			return formatted;
 		}
 		
-		String[][] debug = new String[1][1];
-		return debug;
+		return formatted;
 	}
 
 	// train tree from formatted training data
-	public void train(String[][] formattedTraining) {
+	public void train(ArrayList<ArrayList<String>> formattedTraining) {
 
 	}
 
