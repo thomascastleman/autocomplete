@@ -8,14 +8,14 @@ class Database extends Main{
 	public static void main(String args[]){  
 		try{  
 			Connection con=DriverManager.getConnection("jdbc:mysql://box1275.bluehost.com:3306/jlindber_autocomplete","jlindber_public","Gnx-H7G-BBf-gdk");  
-			constructCharTree(con);
+			constructWordTree(con);
 			Statement stmt=con.createStatement();  
 			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
-			ResultSet rs=stmt.executeQuery("SELECT * FROM `charTree`");  
+			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`");  
 			ResultSetMetaData rsmd = rs.getMetaData();
 			System.out.println(rsmd);
 			while(rs.next()){  
-				for (int i = 1; i<6; i++){
+				for (int i = 1; i<5; i++){
 				System.out.print(rsmd.getColumnTypeName(i) +": "+rs.getObject(i) + "     ");  
 				}
 				System.out.println(" ");
@@ -59,9 +59,52 @@ class Database extends Main{
 			}
 			
 			Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
-			System.out.println(Main.charTree.origin.children.get(2).content);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
 			//System.out.println(nodes);
+
+		}catch(Exception e){ 
+			System.out.println(e);
+		}  
+		
+	
+	}
+	
+	
+	public static void constructWordTree(Connection con){
+		try{  
+			Statement stmt=con.createStatement();  
+			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`"); 
+			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
+			ArrayList<Node> nodes = new ArrayList<Node>();
+			while(rs.next()){
+				Node n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
+				nodes.add(n);
+				String childString = rs.getString("children");
+				if (childString!=null){
+					String[] childrenStringArray = childString.split(",");
+					int[] childrenIntArray = new int[childrenStringArray.length];
+					for(int i = 0; i<childrenStringArray.length; i++) {
+						childrenIntArray[i] = Integer.parseInt(childrenStringArray[i]);
+					}
+					nodeChildren.put(n, childrenIntArray);
+				}else{
+					nodeChildren.put(n, null);
+					}
+			} 
+			
+			for(int i = 0; i<nodes.size(); i++) {
+				int[] c = nodeChildren.get(nodes.get(i));
+				if (c != null){
+					for(int child = 0; child<=c.length; child++) {
+						nodes.get(i).children.addAll(searchForNodeWithId(child, nodes));
+						//System.out.println(child);
+					}
+				}
+			}
+			
+			Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
+			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
+			System.out.println(Main.wordTree.origin.children.get(0).content);
 
 		}catch(Exception e){ 
 			System.out.println(e);
