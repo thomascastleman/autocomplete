@@ -13,7 +13,7 @@ public class Main {
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
 	String rawTrainingData;													// training data as single string
-	public Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
+	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
@@ -26,13 +26,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		
-		// dictionary = readInDictionary("dictionary.txt");
-
 		// rawTrainingData = readInRawData("beeMovie.txt");
-
-		Database.constructTree(TreeType.CHARTREE);
-		System.out.println(charTree.origin.content);
+	//	Database.constructTree(TreeType.CHARTREE);
+		// System.out.println(charTree.origin.content);
 
 //		System.out.println(charTree.origin.children.get(0).content);
 //		System.out.println(charTree.origin.children.get(0).children.get(0).content);

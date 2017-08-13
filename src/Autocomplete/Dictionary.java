@@ -25,6 +25,8 @@ public class Dictionary extends Main {
 			}
 
 			bufferedReader.close();
+			
+			System.out.println(words.get(0));
 
 			// get max word length in dictionary
 			int max = words.get(0).length();
@@ -46,8 +48,9 @@ public class Dictionary extends Main {
 
 			// alphabetize each arraylist
 			for (int i = 0; i < this.content.size(); i++) {
+				ArrayList<String> alphabetized = alphabetize(this.content.get(i));
 				this.content.get(i).clear();
-				this.content.get(i).addAll(alphabetize(this.content.get(i)));
+				this.content.get(i).addAll(alphabetized);
 			}
 		}
 		
@@ -106,6 +109,10 @@ public class Dictionary extends Main {
 	// binary search dictionary for string s, return true if found, false otherwise
 	public boolean search(String s) {
 
+		
+		if (s.length() > this.content.size()) {
+			return false;
+		}
 		// get words of same length
 		ArrayList<String> sameLength = this.content.get(s.length());
 
@@ -119,20 +126,20 @@ public class Dictionary extends Main {
 
 			// if string found
 			if (s.equals(sameLength.get(pivot))) {
-				// System.out.println(s + " == " + sameLength.get(pivot));
+				System.out.println(s + " == " + sameLength.get(pivot));
 
 				return true;
 			} else {
 
 				// if s comes before pivot
 				if (alpha(s, sameLength.get(pivot))) {
-					// System.out.println(s + " < " + sameLength.get(pivot));
+					System.out.println(s + " < " + sameLength.get(pivot));
 
 					max = pivot;
 
 				// if s comes after pivot
 				} else {
-					// System.out.println(s + " > " + sameLength.get(pivot));
+					System.out.println(s + " > " + sameLength.get(pivot));
 
 					min = pivot + 1;
 				}
