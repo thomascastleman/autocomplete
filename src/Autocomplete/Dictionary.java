@@ -126,20 +126,20 @@ public class Dictionary extends Main {
 
 			// if string found
 			if (s.equals(sameLength.get(pivot))) {
-				System.out.println(s + " == " + sameLength.get(pivot));
+				// System.out.println(s + " == " + sameLength.get(pivot));
 
 				return true;
 			} else {
 
 				// if s comes before pivot
 				if (alpha(s, sameLength.get(pivot))) {
-					System.out.println(s + " < " + sameLength.get(pivot));
+					// System.out.println(s + " < " + sameLength.get(pivot));
 
 					max = pivot;
 
 				// if s comes after pivot
 				} else {
-					System.out.println(s + " > " + sameLength.get(pivot));
+					// System.out.println(s + " > " + sameLength.get(pivot));
 
 					min = pivot + 1;
 				}

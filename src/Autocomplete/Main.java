@@ -12,8 +12,8 @@ public class Main {
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
-	String rawTrainingData;													// training data as single string
-	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
+	String rawTrainingData;															// training data as single string
+	public static Dictionary dictionary = new Dictionary("fourhundredseventyninethousand.txt"); 		// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		// rawTrainingData = readInRawData("beeMovie.txt");
-	//	Database.constructTree(TreeType.CHARTREE);
+		// Database.constructTree(TreeType.CHARTREE);
 		// System.out.println(charTree.origin.content);
 
 //		System.out.println(charTree.origin.children.get(0).content);
@@ -65,30 +65,30 @@ public class Main {
 	// 	//union
 	// }
 
-	// // read in training data as single string
-	// public static String readInRawData(String file) {
-	// 	String line = null;
-	// 	String total = "";
+	// read in training data as single string
+	public static String readInRawData(String file) {
+		String line = null;
+		String total = "";
 
-	// 	try {
-	// 		FileReader fileReader = new FileReader(file);
-	// 		BufferedReader bufferedReader =  new BufferedReader(fileReader);
+		try {
+			FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader =  new BufferedReader(fileReader);
 			
-	// 		while ((line = bufferedReader.readLine()) != null) { 
-	// 			total = total + " " + line;
-	// 		}
+			while ((line = bufferedReader.readLine()) != null) { 
+				total = total + " " + line;
+			}
 
-	// 		total = total.replaceAll("\\s\\s", " ");
-	// 		total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
+			total = total.replaceAll("\\s\\s", " ");
+			total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
 
-	// 		bufferedReader.close();
-	// 	}
+			bufferedReader.close();
+		}
 		
-	// 	catch(FileNotFoundException ex) {
-	// 		System.out.println("Unable to open file '" + file + "'");
-	// 	}
-	// 	catch(IOException ex) {
-	// 		System.out.println("Error reading file '" + file + "'");
-	// 	}
-	// }
+		catch(FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + file + "'");
+		}
+		catch(IOException ex) {
+			System.out.println("Error reading file '" + file + "'");
+		}
+	}
 }
