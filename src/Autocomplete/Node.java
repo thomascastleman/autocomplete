@@ -12,7 +12,7 @@ public class Node extends Tree {
 	public boolean isWord;
 
 	
-	public Node(int id, int probability, String content, boolean isWord) {
+	public Node(int id, String content, int probability, boolean isWord) {
 		this.id = id;
 		this.probability = probability;
 		this.content = content;

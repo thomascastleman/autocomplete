@@ -1,8 +1,8 @@
 package Autocomplete;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;  
+import java.util.*;
+
 
 class Database extends Main{  
 	public static void main(String args[]){  
@@ -30,22 +30,56 @@ class Database extends Main{
 		try{  
 			Statement stmt=con.createStatement();  
 			ResultSet rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
-			HashMap<Node,Integer[]> hm=new HashMap<Node,Integer[]>(); 
+			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
+			ArrayList<Node> nodes = new ArrayList<Node>();
 			while(rs.next()){
-				//Node n = new Node();
-				for (int i = 1; i<6; i++){
-				System.out.print(rs.getObject(i) + "     ");  
-				}
-				System.out.println(" ");
+				Node n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"), rs.getBoolean("isWord"));
+				nodes.add(n);
+				String childString = rs.getString("children");
+				if (childString!=null){
+					String[] childrenStringArray = childString.split(",");
+					int[] childrenIntArray = new int[childrenStringArray.length];
+					for(int i = 0; i<childrenStringArray.length; i++) {
+						childrenIntArray[i] = Integer.parseInt(childrenStringArray[i]);
+					}
+					nodeChildren.put(n, childrenIntArray);
+				}else{
+					nodeChildren.put(n, null);
+					}
 			} 
+			
+			for(int i = 0; i<nodes.size(); i++) {
+				int[] c = nodeChildren.get(nodes.get(i));
+				if (c != null){
+					for(int child = 0; child<c.length; child++) {
+						nodes.get(i).children = searchForNodeWithId(child, nodes);
+						//System.out.println(child);
+					}
+				}
+			}
+			
+			
+			System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
+			System.out.println(nodes);
+
 		}catch(Exception e){ 
 			System.out.println(e);
 		}  
 		
 	
 	}
+	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n){
+		ArrayList<Node> f = new ArrayList<Node>();
+		for(int i = 0; i<n.size(); i++) {
+			if (n.get(i).id == id){
+				f.add(n.get(i));
+			}
+		}
+		return f;
+	} 
 
 }
+
 
 
 /*

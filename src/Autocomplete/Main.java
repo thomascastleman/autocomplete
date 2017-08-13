@@ -18,14 +18,17 @@ public class Main{
 	public enum TreeType{WORDTREE,CHARTREE};
 	String trainingData;
 	String file = "null";
+	public static Tree wordTree = null;
+	public static Tree charTree = null;
+
 	//FileReader fileReader;
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
 
 	public static void main(String[] args) {
 		
-		Tree wordTree = new Tree(TreeType.WORDTREE);
-		Tree charTree = new Tree(TreeType.CHARTREE);
+		wordTree = new Tree(TreeType.WORDTREE);
+		charTree = new Tree(TreeType.CHARTREE);
 		
 		//wordTree.construct(false);
 		
