@@ -51,16 +51,17 @@ class Database extends Main{
 			for(int i = 0; i<nodes.size(); i++) {
 				int[] c = nodeChildren.get(nodes.get(i));
 				if (c != null){
-					for(int child = 0; child<c.length; child++) {
-						nodes.get(i).children = searchForNodeWithId(child, nodes);
+					for(int child = 0; child<=c.length; child++) {
+						nodes.get(i).children.addAll(searchForNodeWithId(child, nodes));
 						//System.out.println(child);
 					}
 				}
 			}
 			
-			
-			System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
-			System.out.println(nodes);
+			Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
+			System.out.println(Main.charTree.origin.children.get(2).content);
+			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
+			//System.out.println(nodes);
 
 		}catch(Exception e){ 
 			System.out.println(e);

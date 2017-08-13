@@ -16,8 +16,8 @@ public class Main{
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
 	String file = "null";
-	public static Tree wordTree = null;
-	public static Tree charTree = null;
+	public static Tree wordTree = new Tree(TreeType.WORDTREE);
+	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	//FileReader fileReader;
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
@@ -26,8 +26,6 @@ public class Main{
 	public static void main(String[] args) {
 		//rawTrainingData = readInRawData("beeMovie.txt");
 		
-		wordTree = new Tree(TreeType.WORDTREE);
-		charTree = new Tree(TreeType.CHARTREE);
 		
 	}
 
