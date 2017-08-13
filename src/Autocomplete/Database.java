@@ -51,8 +51,8 @@ class Database extends Main{
 			for(int i = 0; i<nodes.size(); i++) {
 				int[] c = nodeChildren.get(nodes.get(i));
 				if (c != null){
-					for(int child = 0; child<=c.length; child++) {
-						nodes.get(i).children.addAll(searchForNodeWithId(child, nodes));
+					for(int child = 0; child<c.length; child++) {
+						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes));
 						//System.out.println(child);
 					}
 				}
@@ -95,16 +95,16 @@ class Database extends Main{
 			for(int i = 0; i<nodes.size(); i++) {
 				int[] c = nodeChildren.get(nodes.get(i));
 				if (c != null){
-					for(int child = 0; child<=c.length; child++) {
-						nodes.get(i).children.addAll(searchForNodeWithId(child, nodes));
-						//System.out.println(child);
+					for(int child = 0; child<c.length; child++) {
+						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes));
+						System.out.println(child);
 					}
 				}
 			}
 			
 			Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
-			System.out.println(Main.wordTree.origin.children.get(0).content);
+			System.out.println(Main.wordTree.origin.children.get(0).children.get(0).content);
 
 		}catch(Exception e){ 
 			System.out.println(e);
