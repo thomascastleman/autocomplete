@@ -15,10 +15,10 @@ public class Node extends Tree {
 		this.content = content_;
 	}
 
-	public Node(int id_, int probability_, String content_, boolean isWord_) {
+	public Node(String content_, int id_, int probability_, boolean isWord_) {
+		this.content = content_;
 		this.id = id_;
 		this.probability = probability_;
-		this.content = content_;
 		this.isWord = isWord_;
 	}
 }
