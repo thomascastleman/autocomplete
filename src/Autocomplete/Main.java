@@ -78,7 +78,7 @@ public class Main{
 	// 	}
 	// }
 
-	public static ArrayList<ArrayList<String>> readInDictionary(String file) {
+	public ArrayList<ArrayList<String>> readInDictionary(String file) {
 		String line = null;
 		ArrayList<String> words = new ArrayList<String>();
 		ArrayList<ArrayList<String>> d = new ArrayList<ArrayList<String>>();
@@ -107,13 +107,14 @@ public class Main{
 			}
 
 			// add words to d by length
-			for (int i = 0; words.size(); i++) {
+			for (int i = 0; i < words.size(); i++) {
 				d.get(words.get(i).length()).add(words.get(i));
 			}
 
 			// alphabetize each arraylist
 			for (int i = 0; i < d.size(); i++) {
-				d.get(i) = alphabetize(d.get(i));
+				d.get(i).clear();
+				d.get(i).addAll(alphabetize(d.get(i)));
 			}
 		}
 		
@@ -128,7 +129,7 @@ public class Main{
 	}
 
 	// alphabetize an arraylist of strings
-	public static ArrayList<String> alphabetize(ArrayList<String> a) {
+	public ArrayList<String> alphabetize(ArrayList<String> a) {
 		ArrayList<String> ordered = new ArrayList<String>();
 
 		while (a.size() > 0) {
@@ -147,7 +148,7 @@ public class Main{
 	}
 
 	// true if s1 before s2, false otherwise
-	public static boolean alpha(String s1, String s2) {
+	public boolean alpha(String s1, String s2) {
 		int i = 0;
 
 		// find while characters are same from both words

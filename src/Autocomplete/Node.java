@@ -7,7 +7,7 @@ public class Node extends Tree {
 	public int id;
 	protected String content;
 	public int probability;
-	public Node parent;
+	public Node parent; //public nodity 
 	public ArrayList<Node> children = new ArrayList<Node>();
 	public boolean isWord;
 
@@ -18,8 +18,8 @@ public class Node extends Tree {
 		this.content = content;
 		this.isWord = isWord;
 }
-	public Node(String content_) {
-		this.content = content_;
+	public Node(String content) {
+		this.content = content;
 	}
 
 }

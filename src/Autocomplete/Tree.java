@@ -5,7 +5,9 @@ import java.util.*;
 public class Tree extends Main{
 	Node origin = null;
 	TreeType type;
-	
+	public Tree(){
+		
+	}
 	public Tree(TreeType t){
 		this.type = t;
 
