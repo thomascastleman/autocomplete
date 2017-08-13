@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Tree extends Main{
 	Node origin = null;
-	TreeType type;
+	static TreeType type;
 	public Tree(){
 		
 	}
@@ -23,6 +23,10 @@ public class Tree extends Main{
 			write tree to file
 
 		*/
+	}
+	
+	public static void constructTreeFromDatabase(){
+		Database.constructTree(type);
 	}
 
 	// // search tree for s

@@ -5,35 +5,46 @@ import java.util.*;
 
 
 class Database extends Main{  
-	public static void main(String args[]){  
+	public static Connection con = null;
+	public static void CreateConnection(){  
 		try{  
-			Connection con=DriverManager.getConnection("jdbc:mysql://box1275.bluehost.com:3306/jlindber_autocomplete","jlindber_public","Gnx-H7G-BBf-gdk");  
-			constructWordTree(con);
-			Statement stmt=con.createStatement();  
-			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
-			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`");  
-			ResultSetMetaData rsmd = rs.getMetaData();
-			System.out.println(rsmd);
-			while(rs.next()){  
-				for (int i = 1; i<5; i++){
-				System.out.print(rsmd.getColumnTypeName(i) +": "+rs.getObject(i) + "     ");  
-				}
-				System.out.println(" ");
-			}
-			con.close();  
+			con=DriverManager.getConnection("jdbc:mysql://box1275.bluehost.com:3306/jlindber_autocomplete","jlindber_public","Gnx-H7G-BBf-gdk");  
+//			//constructTree(con, TreeType.WORDTREE);
+//			Statement stmt=con.createStatement();  
+//			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
+//			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`");  
+//			ResultSetMetaData rsmd = rs.getMetaData();
+//			System.out.println(rsmd);
+//			while(rs.next()){  
+//				for (int i = 1; i<5; i++){
+//				System.out.print(rsmd.getColumnTypeName(i) +": "+rs.getObject(i) + "     ");  
+//				}
+//				System.out.println(" ");
+//			}
 		}catch(Exception e){ 
 			System.out.println(e);
 		}  
 	}  
 
-	public static void constructCharTree(Connection con){
-		try{  
-			Statement stmt=con.createStatement();  
-			ResultSet rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
+	public static void constructTree(TreeType t){
+		CreateConnection();
+		try{ 
+			Statement stmt=con.createStatement();
+			ResultSet rs = null;
+			if (t == TreeType.CHARTREE){
+				rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
+			}else{
+				rs=stmt.executeQuery("SELECT * FROM `wordTree`");
+			}
 			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
 			ArrayList<Node> nodes = new ArrayList<Node>();
 			while(rs.next()){
-				Node n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"), rs.getBoolean("isWord"));
+				Node n = null;
+				if (t == TreeType.CHARTREE){
+					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"), rs.getBoolean("isWord"));
+				}else{
+					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
+				}
 				nodes.add(n);
 				String childString = rs.getString("children");
 				if (childString!=null){
@@ -57,8 +68,12 @@ class Database extends Main{
 					}
 				}
 			}
-			
-			Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
+			if (t == TreeType.CHARTREE){
+				Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
+			}else{
+				Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
+			}
+			//Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
 			//System.out.println(nodes);
 
@@ -101,7 +116,7 @@ class Database extends Main{
 					}
 				}
 			}
-			
+			con.close();
 			Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
 			System.out.println(Main.wordTree.origin.children.get(0).children.get(0).content);
