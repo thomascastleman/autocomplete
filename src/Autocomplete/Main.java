@@ -115,9 +115,6 @@ public class Main{
 			for (int i = 0; i < d.size(); i++) {
 				d.get(i) = alphabetize(d.get(i));
 			}
-
-			return d;
-
 		}
 		
 		catch(FileNotFoundException ex) {
@@ -126,6 +123,8 @@ public class Main{
 		catch(IOException ex) {
 			System.out.println("Error reading file '" + file + "'");
 		}
+
+		return d;
 	}
 
 	// alphabetize an arraylist of strings

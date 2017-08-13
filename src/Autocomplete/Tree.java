@@ -22,14 +22,11 @@ public class Tree extends Main{
 
 		*/
 	}
-	public Tree(){
-		
-	}
 
-	// search tree for s
-//	public ArrayList<Node> search(String[] s) {
-//
-//	}
+	// // search tree for s
+	// public ArrayList<Node> search(String[] s) {
+
+	// }
 
 	// // write tree structure to file
 	// public void writeToFile(String filename) {
@@ -41,19 +38,19 @@ public class Tree extends Main{
 
 	// }
 
-	// format raw training data into 2 dimensional string array (words for chartree, clauses and words for wordtree)
-//	public String[][] formatData(String trainingData) {
-//
-//	}
+	// // format raw training data into 2 dimensional string array (words for chartree, clauses and words for wordtree)
+	// public String[][] formatData(String trainingData) {
 
-	// construct tree from formatted training data
-	public void constructFromTraining(String[][] formattedTraining) {
+	// }
 
-	}
+	// // construct tree from formatted training data
+	// public void constructFromTraining(String[][] formattedTraining) {
 
-	// add a String[] section to the tree, updating what already exists and creating a new branch when necessary
-	public void addSection(String[] section) {
+	// }
 
-	}
+	// // add a String[] section to the tree, updating what already exists and creating a new branch when necessary
+	// public void addSection(String[] section) {
+
+	// }
 }
 
