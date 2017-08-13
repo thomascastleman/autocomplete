@@ -10,7 +10,7 @@ public class Tree extends Main{
 		this.type = t;
 
 		/*
-		
+
 		check for existing files of same TreeType
 
 		if (existing)
@@ -21,6 +21,11 @@ public class Tree extends Main{
 			write tree to file
 
 		*/
+	}
+
+	// search tree for s
+	public ArrayList<Node> search(String[] s) {
+
 	}
 
 	// // write tree structure to file
