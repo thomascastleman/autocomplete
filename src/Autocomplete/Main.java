@@ -28,23 +28,25 @@ public class Main{
 	public ArrayList<Character> alphabet = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
 	public static void main(String[] args) {
+		
 		// dictionary = readInDictionary("dictionary.txt");
 		// rawTrainingData = readInRawData("beeMovie.txt");
 		Database.constructTree(TreeType.CHARTREE);
 		System.out.println(charTree.origin.content);
 
-		System.out.println(charTree.origin.children.get(0).content);
-		System.out.println(charTree.origin.children.get(0).children.get(0).content);
-		System.out.println(charTree.origin.children.get(1).content);
-		System.out.println(charTree.origin.children.get(2).content);
-		
-		
-		Database.constructTree(TreeType.WORDTREE);
-		System.out.println(wordTree.origin.content);
-		System.out.println(wordTree.origin.children.get(0).content);
-		System.out.println(wordTree.origin.children.get(1).content);
-		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
-		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
+//		System.out.println(charTree.origin.children.get(0).content);
+//		System.out.println(charTree.origin.children.get(0).children.get(0).content);
+//		System.out.println(charTree.origin.children.get(1).content);
+//		System.out.println(charTree.origin.children.get(2).content);
+//		
+//		
+//		Database.constructTree(TreeType.WORDTREE);
+//		System.out.println(wordTree.origin.content);
+//		System.out.println(wordTree.origin.children.get(0).content);
+//		System.out.println(wordTree.origin.children.get(1).content);
+//		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
+//		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
+	
 		
 		
 	}

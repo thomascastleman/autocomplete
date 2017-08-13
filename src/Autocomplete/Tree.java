@@ -10,6 +10,7 @@ public class Tree extends Main{
 	}
 	public Tree(TreeType t){
 		this.type = t;
+		origin = new Node(null);	// initialize origin as null
 
 		/*
 
@@ -31,16 +32,6 @@ public class Tree extends Main{
 
 	// // search tree for s
 	// public ArrayList<Node> search(String[] s) {
-
-	// }
-
-	// // write tree structure to file
-	// public void writeToFile(String filename) {
-
-	// }
-
-	// // construct tree from given file
-	// public void constructFromFile(String filename) {
 
 	// }
 
