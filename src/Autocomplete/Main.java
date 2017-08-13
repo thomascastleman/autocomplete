@@ -12,12 +12,12 @@ public class Main {
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
-	String rawTrainingData;															// training data as single string
+	public static String rawTrainingData;															// training data as single string
 	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
-	String file = "null";
+	public String file = "null";
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
@@ -25,8 +25,17 @@ public class Main {
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
 	public static void main(String[] args) {
-		System.out.println(dictionary.search("attention"));
-		// rawTrainingData = readInRawData("beeMovie.txt");
+
+		rawTrainingData = readInRawData("beeMovie.txt");
+		
+		
+		String[][] test = charTree.formatData(rawTrainingData);
+		
+		for (int i = 0; i < 50; i++) {
+			System.out.println(test[i][0]);
+		}
+		
+		
 		// Database.constructTree(TreeType.CHARTREE);
 		// System.out.println(charTree.origin.content);
 

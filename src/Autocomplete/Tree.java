@@ -1,6 +1,7 @@
 package Autocomplete;
 
 import java.util.*;
+import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
@@ -42,12 +43,12 @@ public class Tree extends Main {
 			String[][] formatted = new String[temp.length][1];
 
 			for (int i = 0; i < temp.length; i++) {
-				formatted[i][0] = temp[i].replaceAll("\W", "");
+				formatted[i][0] = temp[i].replaceAll("\\W", "");
 			}
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
-			String[] clauses = trainingData.split("\.|\,");
+			String[] clauses = trainingData.split("\\.|\\,");
 
 			String[][] formatted;
 
@@ -57,6 +58,9 @@ public class Tree extends Main {
 
 			return formatted;
 		}
+		
+		String[][] debug = new String[1][1];
+		return debug;
 	}
 
 	// train tree from formatted training data
