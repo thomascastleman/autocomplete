@@ -35,19 +35,38 @@ public class Tree extends Main {
 
 	// }
 
-	// // format raw training data into 2 dimensional string array (words for chartree, clauses and words for wordtree)
-	// public String[][] formatData(String trainingData) {
+	// format raw training data into 2 dimensional string array (words for chartree, clauses and words for wordtree)
+	public String[][] formatData(String trainingData) {
+		if (this.type == TreeType.CHARTREE) {
+			String[] temp = trainingData.split(" ");
+			String[][] formatted = new String[temp.length][1];
 
-	// }
+			for (int i = 0; i < temp.length; i++) {
+				formatted[i][0] = temp[i].replaceAll("\W", "");
+			}
+			return formatted;
 
-	// // construct tree from formatted training data
-	// public void constructFromTraining(String[][] formattedTraining) {
+		} else if (this.type == TreeType.WORDTREE) {
+			String[] clauses = trainingData.split("\.|\,");
 
-	// }
+			String[][] formatted;
 
-	// // add a String[] section to the tree, updating what already exists and creating a new branch when necessary
-	// public void addSection(String[] section) {
+			for (int c = 0; c < clauses.length; c++) {
+				formatted[c] = clauses[c].split(" ");
+			}
 
-	// }
+			return formatted;
+		}
+	}
+
+	// train tree from formatted training data
+	public void train(String[][] formattedTraining) {
+
+	}
+
+	// add a String[] section to the tree, updating what already exists and creating a new branch when necessary
+	public void addSection(String[] section) {
+
+	}
 }
 

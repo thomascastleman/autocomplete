@@ -13,7 +13,7 @@ public class Main {
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
 	String rawTrainingData;															// training data as single string
-	public static Dictionary dictionary = new Dictionary("fourhundredseventyninethousand.txt"); 		// dictionary, organized by word length and alphabetized
+	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
