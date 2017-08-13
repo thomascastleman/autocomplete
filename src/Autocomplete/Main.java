@@ -25,7 +25,7 @@ public class Main {
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 
 	public static void main(String[] args) {
-
+		System.out.println(dictionary.search("attention"));
 		// rawTrainingData = readInRawData("beeMovie.txt");
 		// Database.constructTree(TreeType.CHARTREE);
 		// System.out.println(charTree.origin.content);
@@ -90,5 +90,7 @@ public class Main {
 		catch(IOException ex) {
 			System.out.println("Error reading file '" + file + "'");
 		}
+		
+		return total;
 	}
 }
