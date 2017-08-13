@@ -28,12 +28,21 @@ public class Main {
 
 		rawTrainingData = readInRawData("beeMovie.txt");
 		
+		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
 		
-		String[][] test = charTree.formatData(rawTrainingData);
-		
+		// CHARTREE FORMAT DEBUGGING:
 		for (int i = 0; i < 50; i++) {
-			System.out.println(test[i][0]);
+			System.out.println(test.get(i).get(0));
 		}
+
+		// WORDTREE FORMAT DEBUGGING:
+		// for (int i = 0; i < 50; i++) {
+		// 	System.out.print("\n\nClause " + i + ": [");
+		// 	for (int w = 0; w < test.get(i).size(); w++) {
+		// 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+		// 	}
+		// 	System.out.print("]");
+		// }
 		
 		
 		// Database.constructTree(TreeType.CHARTREE);
