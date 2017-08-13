@@ -2,7 +2,7 @@ package Autocomplete;
 
 import java.util.*;
 
-public class Tree extends Main{
+public class Tree extends Main {
 	Node origin = null;
 	static TreeType type;
 	public Tree(){

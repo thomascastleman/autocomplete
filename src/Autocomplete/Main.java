@@ -6,14 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Main{
+public class Main {
 
 	public int ngram = 3;						// length of ngram
 	public int numCompletions = 3;				// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};	// enum to determine tree type
 
 	String rawTrainingData;						// training data as single string
-	ArrayList<ArrayList<String>> dictionary; 				// dictionary, organized by word length and alphabetized
+	ArrayList<ArrayList<String>> dictionary; 	// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);

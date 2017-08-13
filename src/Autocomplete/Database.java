@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 
-class Database extends Main{  
+class Database extends Main {  
 	public static Connection con = null;
 	public static void CreateConnection(){  
 		try{  
