@@ -8,7 +8,7 @@ public class Dictionary extends Main {
 	// for alphabetization of dictionary
 	public ArrayList<Character> alphabet = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
-	// actual dictionary content
+	// actual dictionary this.content
 	public ArrayList<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
 	public Dictionary(String filename) {
@@ -36,18 +36,18 @@ public class Dictionary extends Main {
 
 			// initialize as empty arraylists
 			for (int i = 0; i <= max; i++) {
-				content.add(new ArrayList<String>());
+				this.content.add(new ArrayList<String>());
 			}
 
 			// add words to content by length
 			for (int i = 0; i < words.size(); i++) {
-				content.get(words.get(i).length()).add(words.get(i));
+				this.content.get(words.get(i).length()).add(words.get(i));
 			}
 
 			// alphabetize each arraylist
-			for (int i = 0; i < content.size(); i++) {
-				content.get(i).clear();
-				content.get(i).addAll(alphabetize(content.get(i)));
+			for (int i = 0; i < this.content.size(); i++) {
+				this.content.get(i).clear();
+				this.content.get(i).addAll(alphabetize(this.content.get(i)));
 			}
 		}
 		
@@ -83,7 +83,7 @@ public class Dictionary extends Main {
 		int i = 0;
 
 		// find while characters are same from both words
-		while (alphabet.indexOf(s1.charAt(i)) == alphabet.indexOf(s2.charAt(i))) {
+		while (this.alphabet.indexOf(s1.charAt(i)) == this.alphabet.indexOf(s2.charAt(i))) {
 			i++;
 
 			// if s1 shorter than s2
@@ -96,14 +96,52 @@ public class Dictionary extends Main {
 		}
 
 		// check which of different chars comes first
-		if (alphabet.indexOf(s1.charAt(i)) < alphabet.indexOf(s2.charAt(i))) {
+		if (this.alphabet.indexOf(s1.charAt(i)) < this.alphabet.indexOf(s2.charAt(i))) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	// binary search dictionary for string s, return true if found, false otherwise
 	public boolean search(String s) {
-		
+
+		// get words of same length
+		ArrayList<String> sameLength = this.content.get(s.length());
+
+		int pivot;						// pivot index
+		int min = 0;					// inclusive minimum
+		int max = sameLength.size();	// exclusive maximum
+
+		while (true) {
+			// calculate pivot index
+			pivot = (int) Math.floor((max - min) / 2) + min;
+
+			// if string found
+			if (s.equals(sameLength.get(pivot))) {
+				// System.out.println(s + " == " + sameLength.get(pivot));
+
+				return true;
+			} else {
+
+				// if s comes before pivot
+				if (alpha(s, sameLength.get(pivot))) {
+					// System.out.println(s + " < " + sameLength.get(pivot));
+
+					max = pivot;
+
+				// if s comes after pivot
+				} else {
+					// System.out.println(s + " > " + sameLength.get(pivot));
+
+					min = pivot + 1;
+				}
+
+				// if s not found
+				if (min >= max) {
+					return false;
+				}
+			}
+		}
 	}
 }

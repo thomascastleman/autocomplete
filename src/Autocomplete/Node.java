@@ -7,7 +7,7 @@ public class Node extends Tree {
 	public int id;
 	protected String content;
 	public int probability;
-	public Node parent; //public nodity 
+	public Node parent; // public nodity 
 	public ArrayList<Node> children = new ArrayList<Node>();
 	public boolean isWord;
 

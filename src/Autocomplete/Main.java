@@ -8,12 +8,12 @@ import java.util.*;
 
 public class Main {
 
-	public int ngram = 3;										// length of ngram
-	public int numCompletions = 3;								// number of completions returned by findCompletion()
-	public enum TreeType{WORDTREE,CHARTREE};					// enum to determine tree type
+	public int ngram = 3;													// length of ngram
+	public int numCompletions = 3;											// number of completions returned by findCompletion()
+	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
-	String rawTrainingData;										// training data as single string
-	Dictionary dictionary = new Dictionary("dictionary.txt"); 	// dictionary, organized by word length and alphabetized
+	String rawTrainingData;													// training data as single string
+	public Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
@@ -26,6 +26,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// rawTrainingData = readInRawData("beeMovie.txt");
+
 		Database.constructTree(TreeType.CHARTREE);
 		System.out.println(charTree.origin.content);
 
@@ -40,9 +41,7 @@ public class Main {
 		System.out.println(wordTree.origin.children.get(0).content);
 		System.out.println(wordTree.origin.children.get(1).content);
 		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
-		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
-		
-		
+		System.out.println(wordTree.origin.children.get(1).children.get(0).content);		
 	}
 
 	// public static String findCompletion(String[] error) {
