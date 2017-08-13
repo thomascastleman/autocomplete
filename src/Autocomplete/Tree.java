@@ -22,6 +22,9 @@ public class Tree extends Main{
 
 		*/
 	}
+	public Tree(){
+		
+	}
 
 	// search tree for s
 	public ArrayList<Node> search(String[] s) {
