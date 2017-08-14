@@ -32,24 +32,14 @@ public class Main {
 		
 		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
 		
+		charTree.train(test);
+		dfs(charTree.origin);
+		
 		
 		// CHARTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 50; i++) {
 //			System.out.println(test.get(i).get(0));
 //		}
-		
-		
-		
-		charTree.train(test);
-		
-		Node n = charTree.origin;
-		logNode(n);
-		for (int i = 0; i < 1; i++) {
-			for (int c = 0; c < n.children.size(); c++) {
-				logNode(n.children.get(c));
-			}
-			n = n.children.get(0);
-		}
 
 		// WORDTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 100; i++) {
@@ -80,6 +70,14 @@ public class Main {
 		
 		
 
+	}
+	
+	// dfs to display all nodes in tree debugging
+	public static void dfs(Node n) {
+		logNode(n);
+		for (int i = 0; i < n.children.size(); i++) {
+			dfs(n.children.get(i));
+		}
 	}
 	
 	// log all node info to console

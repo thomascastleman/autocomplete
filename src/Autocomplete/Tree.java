@@ -51,6 +51,11 @@ public class Tree extends Main {
 			for (int i = 0; i < temp.length; i++) {
 				formatted.get(i).add(temp[i].replaceAll("\\W", ""));
 			}
+			
+			// remove excess empty string
+			if (formatted.size() > 0) {
+				formatted.remove(0);
+			}
 
 			return formatted;
 
@@ -82,6 +87,7 @@ public class Tree extends Main {
 
 	// train tree from formatted training data
 	public void train(ArrayList<ArrayList<String>> formattedTraining) {
+		
 		if (this.type == TreeType.CHARTREE) {
 			for (int i = 0; i < formattedTraining.size(); i++) {
 				// get word split by its characters
@@ -95,7 +101,7 @@ public class Tree extends Main {
 			for (int cl = 0; cl < formattedTraining.size(); cl++) {
 				ArrayList<String> clause = formattedTraining.get(cl);
 				// for every ngram
-				for (int ng = 0; ng < clause.size() - super.ngram; ng++) {
+				for (int ng = 0; ng <= clause.size() - super.ngram; ng++) {
 					// get ngram
 					ArrayList<String> ngram = new ArrayList<String>(clause.subList(ng, ng + super.ngram));
 					
@@ -109,12 +115,14 @@ public class Tree extends Main {
 
 	// add a String[] section to the tree, updating what already exists and creating a new branch when necessary
 	public void addSection(ArrayList<String> section) {
+		
 		// pointer to origin
 		Node n = this.origin;
 		// whether or not the lowest existing node that matches string content addition has been found
 		boolean lowestExistingFound = false;
 		
 		for (int str = 0; str < section.size(); str++) {
+			String s = section.get(str);
 			
 			if (!lowestExistingFound) {
 				// for every child of n + extra index
@@ -122,20 +130,23 @@ public class Tree extends Main {
 					// if all children searched and no matches found
 					if (ch == n.children.size()) {
 						lowestExistingFound = true;
+						str--;							// decrement index so as not to skip over a string
 						break;
 					}
 					
 					Node child = n.children.get(ch);
+					
 					// if match found
-					if (child.content.equals(section.get(str))) {
+					if (child.content.equals(s)) {
 						n = child;			// move to that child
 						n.probability++;	// update probability
 						break;
 					}
 				}
-			} else {
+			} else {				
+
 				// start initializing new nodes to add to tree
-				Node newBranch = new Node(section.get(str));
+				Node newBranch = new Node(s);
 				
 				// update parent / children info
 				newBranch.parent = n;
