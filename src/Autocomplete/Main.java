@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
 
-	public int ngram = 4;													// length of ngram
+	public int ngram = 3;													// length of ngram
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
@@ -18,14 +18,20 @@ public class Main {
 
 	
 	public static void main(String[] args) {
-
-		rawTrainingData = readInRawData("testTraining.txt");
 		
-		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
+		rawTrainingData = readInRawData("beeMovie.txt");
 		
-		charTree.train(test);
-		dfs(charTree.origin);
+		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
 		
+		wordTree.train(formatted);
+		// dfs(charTree.origin);
+		
+		// ArrayList<Node> searchResult = charTree.search(new ArrayList<String>(Arrays.asList("b", "e")));
+		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("You", "like")));
+		
+		for (int i = 0; i < searchResult.size(); i++) {
+			logNode(searchResult.get(i));
+		}
 		
 		// CHARTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 50; i++) {
