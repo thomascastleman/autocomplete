@@ -1,9 +1,6 @@
 package Autocomplete;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -12,29 +9,29 @@ public class Main {
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
-	public static String rawTrainingData;															// training data as single string
+	public static String rawTrainingData;											// training data as single string
 	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
-
-	// input and file io stuff
-	public Scanner input = new Scanner(System.in);
-	public String file = "null";
+	
+	// TREES
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
-	//FileReader fileReader;
-	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
-// for (int i = 0; i < 50; i++) {
-//		 	System.out.print("\n\nClause " + i + ": [");
-//		 	for (int w = 0; w < test.get(i).size(); w++) {
-//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-//		 	}
-//		 	System.out.print("]");
-//		 }
+	
 	public static void main(String[] args) {
-
+		
 		rawTrainingData = readInRawData("beeMovie.txt");
 		
-		ArrayList<ArrayList<String>> test = wordTree.formatData(rawTrainingData);
+		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
+		
+		wordTree.train(formatted);
+		// dfs(charTree.origin);
+		
+		// ArrayList<Node> searchResult = charTree.search(new ArrayList<String>(Arrays.asList("b", "e")));
+		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("You", "like")));
+		
+		for (int i = 0; i < searchResult.size(); i++) {
+			logNode(searchResult.get(i));
+		}
 		
 		// CHARTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 50; i++) {
@@ -42,13 +39,20 @@ public class Main {
 //		}
 
 		// WORDTREE FORMAT DEBUGGING:
-		for (int i = 0; i < 100; i++) {
-		 	System.out.print("\n\nClause " + i + ": [");
-		 	for (int w = 0; w < test.get(i).size(); w++) {
-		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-		 	}
-		 	System.out.print("]");
-		 }
+//		for (int i = 0; i < 100; i++) {
+//		 	System.out.print("\nClause " + i + ": [");
+//		 	for (int w = 0; w < test.get(i).size(); w++) {
+//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+//		 	}
+//		 	System.out.print("]");
+//		 }
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		// Database.constructTree(TreeType.CHARTREE);
@@ -70,6 +74,26 @@ public class Main {
 		
 		
 
+	}
+	
+	// dfs to display all nodes in tree debugging
+	public static void dfs(Node n) {
+		logNode(n);
+		for (int i = 0; i < n.children.size(); i++) {
+			dfs(n.children.get(i));
+		}
+	}
+	
+	// log all node info to console
+	public static void logNode(Node n) {
+		System.out.println("\n\n" + n.content + " " + n.probability + " " + n.isWord);
+		if (n.parent != null) {
+			System.out.print("parent: \"" + n.parent.content + "\" ");
+		}
+		System.out.print("children: ");
+		for (int i = 0; i < n.children.size(); i++) {
+			System.out.print(n.children.get(i).content + " ");
+		}
 	}
 
 	// public static String findCompletion(String[] error) {
