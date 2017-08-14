@@ -132,7 +132,7 @@ public class Dictionary extends Main {
 				// if s comes before pivot
 				if (alpha(s, sameLength.get(pivot))) {
 					// System.out.println(s + " < " + sameLength.get(pivot));
-
+					
 					max = pivot;
 
 				// if s comes after pivot

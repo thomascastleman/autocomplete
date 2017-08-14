@@ -19,7 +19,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		rawTrainingData = readInRawData("beeMovie.txt");
+		rawTrainingData = readInRawData("MSND.txt");
 		
 		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
 		
@@ -27,7 +27,7 @@ public class Main {
 		// dfs(charTree.origin);
 		
 		// ArrayList<Node> searchResult = charTree.search(new ArrayList<String>(Arrays.asList("b", "e")));
-		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("Barry","Bee")));
+		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("she","is")));
 		
 		for (int i = 0; i < searchResult.size(); i++) {
 			logNode(searchResult.get(i));
