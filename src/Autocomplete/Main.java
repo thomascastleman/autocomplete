@@ -1,9 +1,6 @@
 package Autocomplete;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -12,14 +9,8 @@ public class Main {
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
-	public static String rawTrainingData;															// training data as single string
+	public static String rawTrainingData;											// training data as single string
 	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
-
-	// input and file io stuff
-	public Scanner input = new Scanner(System.in);
-	public String file = "null";
-	//FileReader fileReader;
-	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
 	
 	// TREES
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
@@ -28,7 +19,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		rawTrainingData = readInRawData("beeMovie.txt");
+		rawTrainingData = readInRawData("testTraining.txt");
 		
 		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
 		
@@ -49,6 +40,13 @@ public class Main {
 //		 	}
 //		 	System.out.print("]");
 //		 }
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		// Database.constructTree(TreeType.CHARTREE);
