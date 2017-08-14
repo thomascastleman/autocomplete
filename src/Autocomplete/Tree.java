@@ -55,12 +55,14 @@ public class Tree extends Main {
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
+			
+			// NEED TO CLEAN DATA MORE !!
+			
 			String[] clauses = trainingData.split("\\.|\\,|\\?|\\!");
 
 			for (int c = 0; c < clauses.length; c++) {
 				
 				clauses[c] = (clauses[c].replaceAll("\\s{2,}", " ")).replaceAll("[^\\w\\s\\']", "");
-				System.out.println(clauses[c]);
 				
 				ArrayList<String> words = new ArrayList<String>(Arrays.asList(clauses[c].split(" ")));
 				

@@ -42,13 +42,13 @@ public class Main {
 //		}
 
 		// WORDTREE FORMAT DEBUGGING:
-		for (int i = 0; i < 100; i++) {
-		 	System.out.print("\n\nClause " + i + ": [");
-		 	for (int w = 0; w < test.get(i).size(); w++) {
-		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-		 	}
-		 	System.out.print("]");
-		 }
+//		for (int i = 0; i < 100; i++) {
+//		 	System.out.print("\nClause " + i + ": [");
+//		 	for (int w = 0; w < test.get(i).size(); w++) {
+//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+//		 	}
+//		 	System.out.print("]");
+//		 }
 		
 		
 		// Database.constructTree(TreeType.CHARTREE);
