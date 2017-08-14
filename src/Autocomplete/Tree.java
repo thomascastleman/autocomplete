@@ -69,7 +69,7 @@ public class Tree extends Main {
 				}
 				
 				if (words.size() != 0) {
-					formatted.add(new ArrayList<String>());
+					formatted.add(new ArrayList<String>());  
 					formatted.get(formatted.size() - 1).addAll(words);
 				}
 			}
