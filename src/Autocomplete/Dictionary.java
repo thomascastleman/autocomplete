@@ -26,8 +26,6 @@ public class Dictionary extends Main {
 
 			bufferedReader.close();
 			
-			System.out.println(words.get(0));
-
 			// get max word length in dictionary
 			int max = words.get(0).length();
 			for (int i = 0; i < words.size(); i++) {

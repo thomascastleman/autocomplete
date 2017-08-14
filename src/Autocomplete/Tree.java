@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	static TreeType type;
+	TreeType type;
 	public Tree(){
 		
 	}
@@ -27,8 +27,8 @@ public class Tree extends Main {
 		*/
 	}
 	
-	public static void constructTreeFromDatabase(){
-		Database.constructTree(type);
+	public void constructTreeFromDatabase(){
+		Database.constructTree(this.type);
 	}
 
 	// // search tree for s
@@ -55,11 +55,23 @@ public class Tree extends Main {
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
-			String[] clauses = trainingData.split("\\.|\\,");
+			String[] clauses = trainingData.split("\\.|\\,|\\?|\\!");
 
 			for (int c = 0; c < clauses.length; c++) {
-				formatted.add(new ArrayList<String>());
-				formatted.get(c).addAll(Arrays.asList(clauses[c].split(" ")));
+				
+				clauses[c] = (clauses[c].replaceAll("\\s{2,}", " ")).replaceAll("[^\\w\\s\\']", "");
+				System.out.println(clauses[c]);
+				
+				ArrayList<String> words = new ArrayList<String>(Arrays.asList(clauses[c].split(" ")));
+				
+				if (words.size() != 0) {
+					words.remove(0);
+				}
+				
+				if (words.size() != 0) {
+					formatted.add(new ArrayList<String>());
+					formatted.get(formatted.size() - 1).addAll(words);
+				}
 			}
 		}
 		

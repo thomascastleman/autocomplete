@@ -23,26 +23,32 @@ public class Main {
 
 	//FileReader fileReader;
 	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
-
+// for (int i = 0; i < 50; i++) {
+//		 	System.out.print("\n\nClause " + i + ": [");
+//		 	for (int w = 0; w < test.get(i).size(); w++) {
+//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+//		 	}
+//		 	System.out.print("]");
+//		 }
 	public static void main(String[] args) {
 
 		rawTrainingData = readInRawData("beeMovie.txt");
 		
-		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
+		ArrayList<ArrayList<String>> test = wordTree.formatData(rawTrainingData);
 		
 		// CHARTREE FORMAT DEBUGGING:
-		for (int i = 0; i < 50; i++) {
-			System.out.println(test.get(i).get(0));
-		}
+//		for (int i = 0; i < 50; i++) {
+//			System.out.println(test.get(i).get(0));
+//		}
 
 		// WORDTREE FORMAT DEBUGGING:
-		// for (int i = 0; i < 50; i++) {
-		// 	System.out.print("\n\nClause " + i + ": [");
-		// 	for (int w = 0; w < test.get(i).size(); w++) {
-		// 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-		// 	}
-		// 	System.out.print("]");
-		// }
+		for (int i = 0; i < 100; i++) {
+		 	System.out.print("\n\nClause " + i + ": [");
+		 	for (int w = 0; w < test.get(i).size(); w++) {
+		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+		 	}
+		 	System.out.print("]");
+		 }
 		
 		
 		// Database.constructTree(TreeType.CHARTREE);
@@ -96,8 +102,7 @@ public class Main {
 				total = total + " " + line;
 			}
 
-			total = total.replaceAll("\\s\\s", " ");
-			total = total.replaceAll("\\s\\s\\s", " "); //you probably know some cool regEx to do this faster
+			total = total.replaceAll("\\s{2,}", " ");
 
 			bufferedReader.close();
 		}
