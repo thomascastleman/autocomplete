@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
 
-	public int ngram = 3;													// length of ngram
+	public int ngram = 4;													// length of ngram
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
@@ -18,28 +18,38 @@ public class Main {
 	// input and file io stuff
 	public Scanner input = new Scanner(System.in);
 	public String file = "null";
+	//FileReader fileReader;
+	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
+	
+	// TREES
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
-	//FileReader fileReader;
-	//BufferedReader bufferedReader =  new BufferedReader(fileReader);
-// for (int i = 0; i < 50; i++) {
-//		 	System.out.print("\n\nClause " + i + ": [");
-//		 	for (int w = 0; w < test.get(i).size(); w++) {
-//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-//		 	}
-//		 	System.out.print("]");
-//		 }
+	
 	public static void main(String[] args) {
 
 		rawTrainingData = readInRawData("beeMovie.txt");
 		
-		ArrayList<ArrayList<String>> test = wordTree.formatData(rawTrainingData);
+		ArrayList<ArrayList<String>> test = charTree.formatData(rawTrainingData);
+		
 		
 		// CHARTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 50; i++) {
 //			System.out.println(test.get(i).get(0));
 //		}
+		
+		
+		
+		charTree.train(test);
+		
+		Node n = charTree.origin;
+		logNode(n);
+		for (int i = 0; i < 1; i++) {
+			for (int c = 0; c < n.children.size(); c++) {
+				logNode(n.children.get(c));
+			}
+			n = n.children.get(0);
+		}
 
 		// WORDTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 100; i++) {
@@ -70,6 +80,18 @@ public class Main {
 		
 		
 
+	}
+	
+	// log all node info to console
+	public static void logNode(Node n) {
+		System.out.println("\n\n" + n.content + " " + n.probability + " " + n.isWord);
+		if (n.parent != null) {
+			System.out.print("parent: \"" + n.parent.content + "\" ");
+		}
+		System.out.print("children: ");
+		for (int i = 0; i < n.children.size(); i++) {
+			System.out.print(n.children.get(i).content + " ");
+		}
 	}
 
 	// public static String findCompletion(String[] error) {
