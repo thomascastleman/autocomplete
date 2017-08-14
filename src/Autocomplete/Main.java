@@ -27,7 +27,7 @@ public class Main {
 		// dfs(charTree.origin);
 		
 		// ArrayList<Node> searchResult = charTree.search(new ArrayList<String>(Arrays.asList("b", "e")));
-		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("You", "like")));
+		ArrayList<Node> searchResult = wordTree.search(new ArrayList<String>(Arrays.asList("Barry","Bee")));
 		
 		for (int i = 0; i < searchResult.size(); i++) {
 			logNode(searchResult.get(i));
