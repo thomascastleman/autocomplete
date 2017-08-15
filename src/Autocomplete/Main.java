@@ -24,7 +24,7 @@ public class Main {
 		ArrayList<ArrayList<String>> formatted = charTree.formatData(rawTrainingData);
 		
 		charTree.train(formatted);
-	//	System.out.println(charTree.origin.id);
+		System.out.println(charTree.origin.content);
 //		rawTrainingData = readInRawData("MSND.txt");
 //		
 //		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
@@ -57,7 +57,7 @@ public class Main {
 		
 		// Database.constructTree(TreeType.WORDTREE);
 		// System.out.println(wordTree.origin.children.get(0).content);
-		 Database.uploadTreeToDatabase(TreeType.WORDTREE);
+		 Database.uploadTreeToDatabase(TreeType.CHARTREE);
 
 	//	System.out.println(wordTree.origin.content);
 		//System.out.println(charTree.origin.children.get(0).children.get(0).content);

@@ -50,15 +50,11 @@ class Database extends Main {
 				// pop from queue
 				v = q.remove(q.size() - 1);
 				ArrayList<Integer> children = new ArrayList<Integer>();
-				//System.out.println(v.children);
-				// add to word nodes if word
-				// for all children
 				
 				for (int ch = 0; ch < v.children.size(); ch++) {
 					// add to queue
 					
 					children.add(v.children.get(ch).id);
-					//Boolean r=stmt.execute("INSERT INTO `autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
 					q.add(v.children.get(ch));
 					}
 				PreparedStatement pstmt= null;
@@ -77,9 +73,9 @@ class Database extends Main {
 					pstmt.setInt(1,v.id);
 					pstmt.setString(2,v.content);  
 					pstmt.setInt(3,v.probability);
-					pstmt.setInt(4,v.probability);
-					pstmt.setBoolean(5,v.isWord);
-					pstmt.setString(6,Arrays.toString(children.toArray()));
+		
+					pstmt.setBoolean(4,v.isWord);
+					pstmt.setString(5,Arrays.toString(children.toArray()));
 					pstmt.executeUpdate();
 				}
 				
@@ -164,48 +160,7 @@ class Database extends Main {
 	    return result;
 	}
 	
-	public static void constructWordTree(Connection con){
-		try{  
-			Statement stmt=con.createStatement();  
-			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`"); 
-			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
-			ArrayList<Node> nodes = new ArrayList<Node>();
-			while(rs.next()){
-				Node n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
-				nodes.add(n);
-				String childString = rs.getString("children");
-				if (childString!=null){
-					String[] childrenStringArray = childString.split(",");
-					int[] childrenIntArray = new int[childrenStringArray.length];
-					for(int i = 0; i<childrenStringArray.length; i++) {
-						childrenIntArray[i] = Integer.parseInt(childrenStringArray[i]);
-					}
-					nodeChildren.put(n, childrenIntArray);
-				}else{
-					nodeChildren.put(n, null);
-					}
-			} 
-			
-			for(int i = 0; i<nodes.size(); i++) {
-				int[] c = nodeChildren.get(nodes.get(i));
-				if (c != null){
-					for(int child = 0; child<c.length; child++) {
-						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes));
-						System.out.println(child);
-					}
-				}
-			}
-			con.close();
-			Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
-			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
-			System.out.println(Main.wordTree.origin.children.get(0).children.get(0).content);
-
-		}catch(Exception e){ 
-			System.out.println(e);
-		}  
-		
 	
-	}
 	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n){
 		ArrayList<Node> f = new ArrayList<Node>();
 		for(int i = 0; i<n.size(); i++) {
