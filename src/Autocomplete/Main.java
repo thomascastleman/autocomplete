@@ -10,14 +10,18 @@ public class Main {
 	public enum TreeType{WORDTREE,CHARTREE};										// enum to determine tree type
 
 	public static String rawTrainingData;											// training data as single string
-	public static Dictionary dictionary = new Dictionary("dictionary.txt"); 		// dictionary, organized by word length and alphabetized
+	public static Dictionary dictionary = new Dictionary("textFiles\\dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 	
 	// TREES
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("beemovie.txt");
+		rawTrainingData = readInRawData("textFiles\\training\\beeMovie.txt");
+		
+		
+		charTree.train(charTree.formatData(rawTrainingData));
+		wordTree.train(wordTree.formatData(rawTrainingData));
 		
 	//	System.out.println(charTree.origin.children.get(1).content);
 		//Database.constructTree(TreeType.CHARTREE);
@@ -37,15 +41,17 @@ public class Main {
 
 		//Database.constructTree(TreeType.WORDTREE);
 		//Database.constructTree(TreeType.CHARTREE);
+		
+		System.out.println(charTree.origin.children);
 
-
-//		String[] phi = {"an", "All","St"};
-//		ArrayList<Node> f = findCompletions(phi);
-//		
-//		for (int i = 0; i < f.size(); i++) {
-//			System.out.println("Completions: ");
-//			logNode(f.get(i));
-//		}
+		String[] phi = {"The", "b"};
+		// String[] phi = {"an", "All","St"};
+		ArrayList<Node> f = findCompletions(phi);
+		
+		for (int i = 0; i < f.size(); i++) {
+			System.out.println("Completions: ");
+			logNode(f.get(i));
+		}
 		
 		//	System.out.println(charTree.origin.id);
 		

@@ -6,8 +6,8 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	 public static int treeIncrement;
-	 static TreeType type;
+	public static int treeIncrement;
+	TreeType type;
 	public Tree(){
 		
 	}
@@ -34,6 +34,12 @@ public class Tree extends Main {
 
 	// search tree for s
 	public ArrayList<Node> search(ArrayList<String> s) {
+		
+		// DEBUG
+		System.out.print("Searching " + this.type + " for ");
+		System.out.println(s);
+		
+		
 		Node current = this.origin;
 		boolean lowestNodeFound = false;
 		
