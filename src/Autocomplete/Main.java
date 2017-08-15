@@ -19,12 +19,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-	//	rawTrainingData = readInRawData("beeMovie.txt");
+		rawTrainingData = readInRawData("beeMovie.txt");
 		
-	//	ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
+		ArrayList<ArrayList<String>> formatted = charTree.formatData(rawTrainingData);
 		
-		//wordTree.train(formatted);
-		//System.out.println(wordTree.origin.id);
+		charTree.train(formatted);
+	//	System.out.println(charTree.origin.id);
 //		rawTrainingData = readInRawData("MSND.txt");
 //		
 //		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
@@ -55,15 +55,9 @@ public class Main {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		 Database.constructTree(TreeType.WORDTREE);
-		 System.out.println(wordTree.origin.children.get(0).content);
-		// Database.uploadTreeToDatabase(TreeType.CHARTREE);
+		// Database.constructTree(TreeType.WORDTREE);
+		// System.out.println(wordTree.origin.children.get(0).content);
+		 Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 	//	System.out.println(wordTree.origin.content);
 		//System.out.println(charTree.origin.children.get(0).children.get(0).content);

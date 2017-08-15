@@ -61,17 +61,30 @@ class Database extends Main {
 					//Boolean r=stmt.execute("INSERT INTO `autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
 					q.add(v.children.get(ch));
 					}
-				System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
-				PreparedStatement pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
-				pstmt.setInt(1,v.id);
-				pstmt.setString(2,v.content);  
-				pstmt.setInt(3,v.probability);
-				pstmt.setString(4,Arrays.toString(children.toArray()));
+				PreparedStatement pstmt= null;
+				if (t == TreeType.WORDTREE){
+					System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
+					pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
+					pstmt.setInt(1,v.id);
+					pstmt.setString(2,v.content);  
+					pstmt.setInt(3,v.probability);
+					pstmt.setString(4,Arrays.toString(children.toArray()));
+					pstmt.executeUpdate();
+				}
+				if (t == TreeType.CHARTREE){
+					System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
+					pstmt = con.prepareStatement("INSERT INTO `charTree` (`id`, `content`, `priority`, `isWord`, `children`) VALUES (?,?,?,?,?);");
+					pstmt.setInt(1,v.id);
+					pstmt.setString(2,v.content);  
+					pstmt.setInt(3,v.probability);
+					pstmt.setInt(4,v.probability);
+					pstmt.setBoolean(5,v.isWord);
+					pstmt.setString(6,Arrays.toString(children.toArray()));
+					pstmt.executeUpdate();
+				}
 				
-				pstmt.executeUpdate();
-				
-			
-			}
+					
+				}
 			}catch(Exception e){ 
 				System.out.println(e);
 			}  
