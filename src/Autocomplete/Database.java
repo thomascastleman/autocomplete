@@ -94,8 +94,17 @@ class Database extends Main {
 			Statement stmt=con.createStatement();
 			ResultSet rs = null;
 			if (t == TreeType.CHARTREE){
+				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'charTree'"); 
+				while(rs.next()){
+					Main.charTree.treeIncrement = rs.getInt("treeIncrement");
+				}
+
 				rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
 			}else{
+				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'wordTree'"); 
+				while(rs.next()){
+					Main.charTree.treeIncrement = rs.getInt("treeIncrement");
+				}
 				rs=stmt.executeQuery("SELECT * FROM `wordTree`");
 			}
 			
@@ -130,15 +139,15 @@ class Database extends Main {
 				int[] c = nodeChildren.get(nodes.get(i));
 				if (c != null){
 					for(int child = 0; child<c.length; child++) {
-						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes));
+						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes, nodes.get(i)));
 						//System.out.println(child);
 					}
 				}
 			}
 			if (t == TreeType.CHARTREE){
-				Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
+				Main.charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
 			}else{
-				Main.wordTree.origin = searchForNodeWithId(1, nodes).get(0);
+				Main.wordTree.origin = searchForNodeWithId(1, nodes, null).get(0);
 			}
 			//Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
@@ -162,10 +171,11 @@ class Database extends Main {
 	}
 	
 	
-	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n){
+	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n, Node parent){
 		ArrayList<Node> f = new ArrayList<Node>();
 		for(int i = 0; i<n.size(); i++) {
 			if (n.get(i).id == id){
+				n.get(i).parent = parent;
 				f.add(n.get(i));
 			}
 		}

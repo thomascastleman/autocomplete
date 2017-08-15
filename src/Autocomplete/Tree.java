@@ -135,7 +135,8 @@ public class Tree extends Main {
 	
 	public String getWholeWord(Node charNode) {
 		String reverse = "";
-		int prob = charNode.probability;		// keep track of isWord node's probability
+		int prob = charNode.probability;
+// keep track of isWord node's probability
 		
 		// while origin not yet reached
 		while (charNode.content != null) {
