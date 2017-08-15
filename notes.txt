@@ -46,4 +46,3 @@ LATER:
 - alphabetization with radix
 - work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
 
-- write tree to database
