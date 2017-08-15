@@ -8,7 +8,7 @@ class Database extends Main {
 	public static Connection con = null;
 	public static void CreateConnection(){  
 		try{  
-			con=DriverManager.getConnection("jdbc:mysql://box1275.bluehost.com:3306/jlindber_autocomplete","jlindber_public","Gnx-H7G-BBf-gdk");  
+			con=DriverManager.getConnection("jdbc:mysql://165.227.73.128/autocorrect?autoReconnect=true&useSSL=false","public","JFC-xNc-U2x-YqN");  
 //			//constructTree(con, TreeType.WORDTREE);
 //			Statement stmt=con.createStatement();  
 //			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
