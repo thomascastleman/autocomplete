@@ -128,7 +128,7 @@ public class Dictionary extends Main {
 
 				return true;
 			} else {
-
+ 
 				// if s comes before pivot
 				if (alpha(s, sameLength.get(pivot))) {
 					// System.out.println(s + " < " + sameLength.get(pivot));
