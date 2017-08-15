@@ -22,6 +22,7 @@ public class Main {
 		wordTree.train(wordTree.formatData(rawTrainingData));
 		charTree.train(charTree.formatData(rawTrainingData));
 		
+
 		String[] phi = {"You", "like", "ja"};
 		ArrayList<Node> f = findCompletions(phi);
 		
@@ -59,6 +60,7 @@ public class Main {
 //		System.out.println(charTree.origin.children.get(1).content);
 		// Database.constructTree(TreeType.WORDTREE);
 		// System.out.println(wordTree.origin.children.get(0).content);
+		 Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		// Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 	//	System.out.println(wordTree.origin.content);
