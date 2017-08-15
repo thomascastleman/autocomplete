@@ -21,14 +21,15 @@ public class Main {
 		
 		wordTree.train(wordTree.formatData(rawTrainingData));
 		charTree.train(charTree.formatData(rawTrainingData));
+		System.out.println(charTree.origin.children.get(1).content);
 		
 
-		String[] phi = {"You", "like", "ja"};
-		ArrayList<Node> f = findCompletions(phi);
-		
-		for (int i = 0; i < f.size(); i++) {
-			logNode(f.get(i));
-		}
+//		String[] phi = {"You", "like", "ja"};
+//		ArrayList<Node> f = findCompletions(phi);
+//		
+//		for (int i = 0; i < f.size(); i++) {
+//			logNode(f.get(i));
+//		}
 		
 		//	System.out.println(charTree.origin.id);
 		

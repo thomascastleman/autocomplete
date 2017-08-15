@@ -35,7 +35,7 @@ class Database extends Main {
 			if (t == TreeType.CHARTREE){
 				n = Main.charTree.origin;
 			}
-			if (t == TreeType.CHARTREE){
+			if (t == TreeType.WORDTREE){
 				n = Main.wordTree.origin;
 			}
 		
@@ -59,7 +59,7 @@ class Database extends Main {
 					}
 				PreparedStatement pstmt= null;
 				if (t == TreeType.WORDTREE){
-					System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
+				//	System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
 					pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
 					pstmt.setInt(1,v.id);
 					pstmt.setString(2,v.content);  
@@ -68,7 +68,8 @@ class Database extends Main {
 					pstmt.executeUpdate();
 				}
 				if (t == TreeType.CHARTREE){
-					System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
+					System.out.println(v.content);
+					//System.out.println("id: "+v.id+" content: "+ v.content.charAt(0)+" children: "+ Arrays.toString(children.toArray()));
 					pstmt = con.prepareStatement("INSERT INTO `charTree` (`id`, `content`, `priority`, `isWord`, `children`) VALUES (?,?,?,?,?);");
 					pstmt.setInt(1,v.id);
 					pstmt.setString(2,v.content);  
