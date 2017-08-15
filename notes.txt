@@ -1,0 +1,49 @@
+ngram = 4
+
+phi ==
+"this is the fragm"
+
+search word tree for ["this", "is", "the"]
+search char tree for ["f", "r", "a", "g", "m"]
+
+------------------------------------------------------------
+
+ngram = 4
+
+phi ==
+"this is some text to search in the tr"
+
+wordtree: ["search", "in", "the"]
+chartree: ["t", "r"]
+
+----------------------------------------------------------
+
+ngram = 4
+
+phi ==
+"the appl"
+
+wordtree: ["the"]
+chartree: ["a", "p", "p", "l"]
+
+------------------------------------------------------------
+
+ngram = 4
+
+phi ==
+"windo"
+
+wordtree: [""]
+chartree: ["w", "i", "n", "d", "o"]
+
+
+_____________________________________________________________________
+
+LATER:
+- find new dictionary, larger but not too large
+- amass training data
+
+- alphabetization with radix
+- work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
+
+- write tree to database
