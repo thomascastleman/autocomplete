@@ -15,7 +15,7 @@ public class Dictionary extends Main {
 
 		String line = null;
 		ArrayList<String> words = new ArrayList<String>();
-
+ 
 		try {
 			FileReader fileReader = new FileReader(filename);
 			BufferedReader bufferedReader =  new BufferedReader(fileReader);

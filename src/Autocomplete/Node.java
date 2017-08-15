@@ -3,7 +3,7 @@ package Autocomplete;
 import java.util.*;
 
 public class Node extends Tree {
-	
+
 	public int id;
 	public String content;
 	public int probability = 1;

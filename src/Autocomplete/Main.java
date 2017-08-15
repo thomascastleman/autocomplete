@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
+ 
 	public static int ngram = 4;													// length of highest ngram
 	public static int numCompletions = 5;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};										// enum to determine tree type

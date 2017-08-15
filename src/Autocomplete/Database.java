@@ -13,7 +13,7 @@ class Database extends Main {
 //			Statement stmt=con.createStatement();  
 //			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
 //			ResultSet rs=stmt.executeQuery("SELECT * FROM `wordTree`");  
-//			ResultSetMetaData rsmd = rs.getMetaData();
+//			ResultSetMeaData rsmd = rs.getMetaData();
 //			System.out.println(rsmd);
 //			while(rs.next()){  
 //				for (int i = 1; i<5; i++){
