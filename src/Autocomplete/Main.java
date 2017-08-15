@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
 
-	public static int ngram = 4;													// length of ngram
+	public static int ngram = 4;													// length of highest ngram
 	public static int numCompletions = 5;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};										// enum to determine tree type
 
@@ -25,13 +25,13 @@ public class Main {
 		
 		//Database.constructTree(TreeType.WORDTREE);
 		//System.out.println(wordTree.treeIncrement);
-		charTree.train(charTree.formatData(rawTrainingData));
-		wordTree.train(wordTree.formatData(rawTrainingData));
-		System.out.println(charTree.treeIncrement);
-		System.out.println(wordTree.treeIncrement);
-		
-		System.out.println(charTree.treeIncrement);
-		System.out.println(wordTree.treeIncrement);
+//		charTree.train(charTree.formatData(rawTrainingData));
+//		wordTree.train(wordTree.formatData(rawTrainingData));
+//		System.out.println(charTree.treeIncrement);
+//		System.out.println(wordTree.treeIncrement);
+//		
+//		System.out.println(charTree.treeIncrement);
+//		System.out.println(wordTree.treeIncrement);
 		//Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
@@ -39,13 +39,13 @@ public class Main {
 		//Database.constructTree(TreeType.CHARTREE);
 
 
-		String[] phi = {"an", "All","St"};
-		ArrayList<Node> f = findCompletions(phi);
-		
-		for (int i = 0; i < f.size(); i++) {
-			System.out.println("Completions: ");
-			logNode(f.get(i));
-		}
+//		String[] phi = {"an", "All","St"};
+//		ArrayList<Node> f = findCompletions(phi);
+//		
+//		for (int i = 0; i < f.size(); i++) {
+//			System.out.println("Completions: ");
+//			logNode(f.get(i));
+//		}
 		
 		//	System.out.println(charTree.origin.id);
 		
