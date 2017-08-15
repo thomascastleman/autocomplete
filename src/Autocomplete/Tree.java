@@ -6,14 +6,14 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	protected static int treeIncrement;
-	public TreeType type;
+	 public static int treeIncrement;
+	 static TreeType type;
 	public Tree(){
 		
 	}
 	public Tree(TreeType t){
 		this.type = t;
-		origin = new Node(null);	// initialize origin as null
+		origin = new Node(null,t);	// initialize origin as null
 
 		/*
 
@@ -87,7 +87,7 @@ public class Tree extends Main {
 			for (int n = 0; n < isWordNodes.size(); n++) {
 				// update node content to reflect whole word
 				
-				Node node = new Node(this.getWholeWord(isWordNodes.get(n)));
+				Node node = new Node(this.getWholeWord(isWordNodes.get(n)), this.type);
 				node.probability = isWordNodes.get(n).probability;
 				completedNodes.add(node);
 				
@@ -272,7 +272,7 @@ public class Tree extends Main {
 			} else {				
 
 				// start initializing new nodes to add to tree
-				Node newBranch = new Node(s);
+				Node newBranch = new Node(s,this.type);
 				
 				// update parent / children info
 				newBranch.parent = n;

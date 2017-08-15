@@ -16,10 +16,19 @@ public class Node extends Tree {
 		this.probability = probability;
 		this.content = content;
 		this.isWord = isWord;
-}
+	}
 	public Node(String content) {
-		this.id = super.treeIncrement;
-		super.treeIncrement++;
+		this.content = content;
+	}
+	public Node(String content, TreeType t) {
+		if (t == TreeType.CHARTREE){
+			this.id = Main.charTree.treeIncrement;
+			Main.charTree.treeIncrement++;
+		}
+		if (t == TreeType.WORDTREE){
+			this.id = Main.wordTree.treeIncrement;
+			Main.wordTree.treeIncrement++;
+		}
 		
 		this.content = content;
 	}
