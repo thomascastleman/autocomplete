@@ -6,14 +6,16 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	public static int treeIncrement;
+	public int treeIncrement = 1;
 	TreeType type;
+	
 	public Tree(){
 		
 	}
+	
 	public Tree(TreeType t){
 		this.type = t;
-		origin = new Node(null,t);	// initialize origin as null
+		origin = new Node(null);		// initialize origin as null
 
 		/*
 
@@ -36,7 +38,7 @@ public class Tree extends Main {
 	public ArrayList<Node> search(ArrayList<String> s) {
 		
 		// DEBUG
-		System.out.print("Searching " + this.type + " for ");
+		System.out.print("\nSearching " + this.type + " for ");
 		System.out.println(s);
 		
 		
@@ -141,8 +143,8 @@ public class Tree extends Main {
 	
 	public String getWholeWord(Node charNode) {
 		String reverse = "";
+		// keep track of isWord node's probability
 		int prob = charNode.probability;
-// keep track of isWord node's probability
 		
 		// while origin not yet reached
 		while (charNode.content != null) {
@@ -265,9 +267,7 @@ public class Tree extends Main {
 						str--;							// decrement index so as not to skip over a string
 						break;
 					}
-					
 					Node child = n.children.get(ch);
-					
 					// if match found
 					if (child.content.equals(s)) {
 						n = child;			// move to that child

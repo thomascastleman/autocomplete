@@ -44,8 +44,8 @@ LATER:
 - amass training data
 
 - work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
-
-- create folder for all text files in /autocomplete
+- need to account for the fact that all char nodes are weighted heavier than word nodes, as chars occur
+more frequently than words
 
 Big error:
 

@@ -17,41 +17,77 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("textFiles\\training\\beeMovie.txt");
+		rawTrainingData = readInRawData("textFiles\\training\\MSND.txt");
 		
 		
 		charTree.train(charTree.formatData(rawTrainingData));
 		wordTree.train(wordTree.formatData(rawTrainingData));
 		
 	//	System.out.println(charTree.origin.children.get(1).content);
-		//Database.constructTree(TreeType.CHARTREE);
-		//System.out.println(charTree.treeIncrement);
-		
+//		System.out.println(charTree.type);
+//		Database.constructTree(TreeType.CHARTREE);
+//		System.out.println(charTree.treeIncrement);
+//		
+//		System.out.println(wordTree.type);
+//		Database.constructTree(TreeType.WORDTREE);
+//		System.out.println(wordTree.treeIncrement);
+//		System.out.println(wordTree.type);
+
+		//wordTree.treeIncrement++;
 		//Database.constructTree(TreeType.WORDTREE);
 		//System.out.println(wordTree.treeIncrement);
-//		charTree.train(charTree.formatData(rawTrainingData));
+//		wordTree.train(wordTree.formatData(rawTrainingData));
+		//System.out.println(wordTree.origin.id);
+		
+		//charTree.train(charTree.formatData(rawTrainingData));
 //		wordTree.train(wordTree.formatData(rawTrainingData));
 //		System.out.println(charTree.treeIncrement);
 //		System.out.println(wordTree.treeIncrement);
 //		
 //		System.out.println(charTree.treeIncrement);
 //		System.out.println(wordTree.treeIncrement);
-		//Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
+		// Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 		//Database.constructTree(TreeType.WORDTREE);
 		//Database.constructTree(TreeType.CHARTREE);
 		
-		System.out.println(charTree.origin.children);
+		// System.out.println(charTree.origin.children);
 
-		String[] phi = {"The", "b"};
-		// String[] phi = {"an", "All","St"};
+		String[] phi = {"You"};
 		ArrayList<Node> f = findCompletions(phi);
-		
+		System.out.println("\nCompletions: ");
 		for (int i = 0; i < f.size(); i++) {
-			System.out.println("Completions: ");
 			logNode(f.get(i));
 		}
+		
+//		// Test with prediction
+//		String correction = f.get(0).content;
+//		phi[phi.length - 1] = correction;
+//		
+//		ArrayList<String> t = new ArrayList<String>(Arrays.asList(phi));
+//		
+//		int depth = 5;
+//		for (int i = 0; i < depth; i++) {
+//			ArrayList<String> lastNgram;
+//			if (t.size() >= ngram - 1) {
+//				lastNgram = new ArrayList<String>(t.subList(t.size() - (ngram - 1), t.size()));
+//			} else {
+//				lastNgram = t;
+//			}
+//			ArrayList<Node> prediction = wordTree.search(lastNgram);
+//			if (prediction.size() > 0) {
+//				t.add(prediction.get(0).content);
+//			}
+//			
+//			System.out.println(t);
+//		}
+		
+		
+	
+		
+		
+		
 		
 		//	System.out.println(charTree.origin.id);
 		
@@ -110,6 +146,25 @@ public class Main {
 		
 
 	}
+	public static int getTreeIncrement(TreeType t){
+		if(t == TreeType.CHARTREE){
+			return charTree.treeIncrement;
+		}
+		if(t == TreeType.WORDTREE){
+			return wordTree.treeIncrement;
+		}
+		return 0;
+	}
+	
+	public static void setTreeIncrement(TreeType t,int i){
+		if(t == TreeType.CHARTREE){
+			charTree.treeIncrement = i;
+		}
+		if(t == TreeType.WORDTREE){
+			wordTree.treeIncrement = i;
+		}
+		
+	}
 	
 	// dfs to display all nodes in tree debugging
 	public static void dfs(Node n) {
@@ -135,7 +190,7 @@ public class Main {
 		String lastWord = error[error.length - 1];
 		
 		// if word exists in dictionary
-		if (dictionary.search(lastWord)) {
+		if (false) { // dictionary.search(lastWord)) {
 			// make no completion
 			return new ArrayList<Node>();
 		} else {
@@ -187,6 +242,11 @@ public class Main {
 				wordCompletions = wordTree.search(formattedForWord);
 			}
 			
+			// DEBUG
+			System.out.print("\n");
+			System.out.println(charCompletions.size() + " character completions found");
+			System.out.println(wordCompletions.size() + " word completions found");
+			
 //			System.out.println("\n\nChar completions: ");
 //			for (int i = 0; i < charCompletions.size(); i++) {
 //				logNode(charCompletions.get(i));
@@ -199,7 +259,13 @@ public class Main {
 			
 			ArrayList<Node> intersection = intersect(charCompletions, wordCompletions);
 			
+			// DEBUG
+			System.out.println(intersection.size() + " completions after intersection");
+			
 			ArrayList<Node> result = onion(intersection, relativeComplement(charCompletions, intersection));
+			
+			// DEBUG
+			System.out.println(result.size() + " completions after union and relative complement");
 			
 			Collections.sort(result, new ProbabilityComparator());
 			
@@ -290,7 +356,13 @@ public class Main {
 class ProbabilityComparator implements Comparator<Node> {
 	@Override
 	public int compare(Node n1, Node n2) {
-		return n1.probability > n2.probability ? -1 : 1;
+		if (n1.probability > n2.probability) {
+			return -1;
+		} else if (n2.probability > n1.probability) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 }
