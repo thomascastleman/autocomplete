@@ -23,6 +23,4 @@ public class Node extends Tree {
 		
 		this.content = content;
 	}
-	
-
 }

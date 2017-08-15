@@ -150,8 +150,6 @@ public class Tree extends Main {
 			word += reverse.charAt(l);
 		}
 		
-		System.out.println(reverse + " ---> " + word);
-		
 		return word;
 	}
 
@@ -219,8 +217,8 @@ public class Tree extends Main {
 			// for every clause
 			for (int cl = 0; cl < formattedTraining.size(); cl++) {
 				ArrayList<String> clause = formattedTraining.get(cl);
+				
 				// for every ngram
-				// for (int ng = 0; ng <= clause.size() - super.ngram; ng++) {
 				for (int ng = 0; ng < clause.size() - 1; ng++) {
 					
 					// get ngram phrase
