@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
 
-	public int ngram = 3;													// length of ngram
+	public int ngram = 4;													// length of ngram
 	public int numCompletions = 3;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};								// enum to determine tree type
 
@@ -16,10 +16,9 @@ public class Main {
 	public static Tree wordTree = new Tree(TreeType.WORDTREE);
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
-	
 	public static void main(String[] args) {
 		
-		rawTrainingData = readInRawData("MSND.txt");
+		rawTrainingData = readInRawData("beeMovie.txt");
 		
 		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
 		

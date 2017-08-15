@@ -219,16 +219,24 @@ public class Tree extends Main {
 			for (int cl = 0; cl < formattedTraining.size(); cl++) {
 				ArrayList<String> clause = formattedTraining.get(cl);
 				// for every ngram
-				for (int ng = 0; ng <= clause.size() - super.ngram; ng++) {
-					// get ngram
-					ArrayList<String> ngram = new ArrayList<String>(clause.subList(ng, ng + super.ngram));
+				// for (int ng = 0; ng <= clause.size() - super.ngram; ng++) {
+				for (int ng = 0; ng < clause.size() - 1; ng++) {
+					
+					// get ngram phrase
+					ArrayList<String> ngram;
+					
+					// if no super.ngrams left in clause, use smaller ngrams
+					if (ng > clause.size() - super.ngram) {
+						ngram = new ArrayList<String>(clause.subList(ng, ng + (clause.size() - ng)));
+					} else {
+						ngram = new ArrayList<String>(clause.subList(ng, ng + super.ngram));
+					}
 					
 					// add ngram to tree
 					this.addSection(ngram);
 				}
 			}
 		}
-
 	}
 
 	// add a String[] section to the tree, updating what already exists and creating a new branch when necessary
@@ -282,3 +290,31 @@ public class Tree extends Main {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
