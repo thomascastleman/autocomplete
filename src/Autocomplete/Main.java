@@ -19,9 +19,9 @@ public class Main {
 	public static void main(String[] args) {
 		rawTrainingData = readInRawData("beeMovie.txt");
 		
-		wordTree.train(wordTree.formatData(rawTrainingData));
-		charTree.train(charTree.formatData(rawTrainingData));
-		System.out.println(charTree.origin.children.get(1).content);
+	//	wordTree.train(wordTree.formatData(rawTrainingData));
+		//charTree.train(charTree.formatData(rawTrainingData));
+	//	System.out.println(charTree.origin.children.get(1).content);
 		
 
 //		String[] phi = {"You", "like", "ja"};
@@ -61,7 +61,7 @@ public class Main {
 //		System.out.println(charTree.origin.children.get(1).content);
 		// Database.constructTree(TreeType.WORDTREE);
 		// System.out.println(wordTree.origin.children.get(0).content);
-		 Database.uploadTreeToDatabase(TreeType.CHARTREE);
+		// Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		// Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 	//	System.out.println(wordTree.origin.content);
@@ -69,11 +69,20 @@ public class Main {
 	//	System.out.println(charTree.origin.children.get(1).content);
 //		System.out.println(charTree.origin.children.get(2).content);
 //		
-//		
-//		Database.constructTree(TreeType.WORDTREE);
-//		System.out.println(wordTree.origin.content);
-//		System.out.println(wordTree.origin.children.get(0).content);
-//		System.out.println(wordTree.origin.children.get(1).content);
+//		.children.get(0)
+		Database.constructTree(TreeType.CHARTREE);
+		System.out.println(charTree.origin.content);
+		System.out.println(charTree.origin.children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).content);
+		System.out.println(charTree.origin.children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).children.get(0).content);
+
+		
 //		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
 //		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
 		
