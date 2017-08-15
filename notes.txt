@@ -43,7 +43,6 @@ LATER:
 - find new dictionary, larger but not too large
 - amass training data
 
-- alphabetization with radix
 - work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
 
 - create folder for all text files in /autocomplete
