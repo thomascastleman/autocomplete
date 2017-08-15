@@ -6,14 +6,16 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	 public static int treeIncrement;
-	 static TreeType type;
+	public int treeIncrement = 1;
+	TreeType type;
+	
 	public Tree(){
 		
 	}
+	
 	public Tree(TreeType t){
 		this.type = t;
-		origin = new Node(null,t);	// initialize origin as null
+		origin = new Node(null);		// initialize origin as null
 
 		/*
 
@@ -259,9 +261,7 @@ public class Tree extends Main {
 						str--;							// decrement index so as not to skip over a string
 						break;
 					}
-					
 					Node child = n.children.get(ch);
-					
 					// if match found
 					if (child.content.equals(s)) {
 						n = child;			// move to that child

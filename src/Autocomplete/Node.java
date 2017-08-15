@@ -17,18 +17,16 @@ public class Node extends Tree {
 		this.content = content;
 		this.isWord = isWord;
 	}
+	
 	public Node(String content) {
 		this.content = content;
+		this.id = 1;
 	}
+	
 	public Node(String content, TreeType t) {
-		if (t == TreeType.CHARTREE){
-			this.id = Main.charTree.treeIncrement;
-			Main.charTree.treeIncrement++;
-		}
-		if (t == TreeType.WORDTREE){
-			this.id = Main.wordTree.treeIncrement;
-			Main.wordTree.treeIncrement++;
-		}
+			this.id = getTreeIncrement(t);
+			setTreeIncrement(t, this.id+1);
+		
 		
 		this.content = content;
 	}

@@ -66,6 +66,7 @@ class Database extends Main {
 				PreparedStatement pstmt= null;
 				if (v.id > remoteTreeIncrement){
 					if (t == TreeType.WORDTREE){
+						System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
 						pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
 						pstmt.setInt(1,v.id);
 						pstmt.setString(2,v.content);  
@@ -75,7 +76,7 @@ class Database extends Main {
 					}
 					if (t == TreeType.CHARTREE){
 						System.out.println(v.content);
-						//System.out.println("id: "+v.id+" content: "+ v.content.charAt(0)+" children: "+ Arrays.toString(children.toArray()));
+						System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
 						pstmt = con.prepareStatement("INSERT INTO `charTree` (`id`, `content`, `priority`, `isWord`, `children`) VALUES (?,?,?,?,?);");
 						pstmt.setInt(1,v.id);
 						pstmt.setString(2,v.content);  
@@ -136,41 +137,54 @@ class Database extends Main {
 				Node n = null;
 				
 				if (t == TreeType.CHARTREE){
+					
 					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"), rs.getBoolean("isWord"));
 					
 				}else{
+					
 					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
 				}
 				
 				nodes.add(n);
 				String a = rs.getString("children");
-				a = a.substring(1, a.length()-1);
-				int[] children = null;
-				if (a.length()>0){
-				//System.out.println(a);
-				children = stringArrayToIntArray(a);
+				if (a != null){
+					a = a.substring(1, a.length()-1);
+					int[] children = null;
+					if (a.length()>0){
+						//System.out.println(a);
+						children = stringArrayToIntArray(a);
+					}
+					nodeChildren.put(n, children);
 				}
-				
-				nodeChildren.put(n, children);
 				
 			} 
 			
 			for(int i = 0; i<nodes.size(); i++) {
+
 				int[] c = nodeChildren.get(nodes.get(i));
+
 				if (c != null){
+
 					for(int child = 0; child<c.length; child++) {
+
 						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes, nodes.get(i)));
+
 						//System.out.println(child);
 					}
 				}
 			}
+			//System.out.println("1");
+
 			if (t == TreeType.CHARTREE){
-				Main.charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
+
+				charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
 				
 			}else{
-				Main.wordTree.origin = searchForNodeWithId(1, nodes, null).get(0);
+
+				wordTree.origin = searchForNodeWithId(17887, nodes, null).get(0);
 				
 			}
+
 			//Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));
 			//System.out.println(nodes);
@@ -194,12 +208,21 @@ class Database extends Main {
 	
 	
 	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n, Node parent){
+		System.out.println("1");
+
 		ArrayList<Node> f = new ArrayList<Node>();
-		for(int i = 0; i<n.size(); i++) {
+		System.out.println("2");
+		if (n != null){
+			
+		for(int i = 0; i<n.size()-1; i++) {
+		//	System.out.println("3");
+
+			//System.out.println(n);
 			if (n.get(i).id == id){
 				n.get(i).parent = parent;
 				f.add(n.get(i));
 			}
+		}
 		}
 		return f;
 	} 

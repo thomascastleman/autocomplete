@@ -17,23 +17,33 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("beemovie.txt");
+		rawTrainingData = readInRawData("testTraining.txt");
 		
 	//	System.out.println(charTree.origin.children.get(1).content);
-		//Database.constructTree(TreeType.CHARTREE);
-		//System.out.println(charTree.treeIncrement);
-		
+//		System.out.println(charTree.type);
+//		Database.constructTree(TreeType.CHARTREE);
+//		System.out.println(charTree.treeIncrement);
+//		
+//		System.out.println(wordTree.type);
+//		Database.constructTree(TreeType.WORDTREE);
+//		System.out.println(wordTree.treeIncrement);
+//		System.out.println(wordTree.type);
+
+		//wordTree.treeIncrement++;
 		//Database.constructTree(TreeType.WORDTREE);
 		//System.out.println(wordTree.treeIncrement);
-//		charTree.train(charTree.formatData(rawTrainingData));
+		wordTree.train(wordTree.formatData(rawTrainingData));
+		//System.out.println(wordTree.origin.id);
+		
+		//charTree.train(charTree.formatData(rawTrainingData));
 //		wordTree.train(wordTree.formatData(rawTrainingData));
 //		System.out.println(charTree.treeIncrement);
 //		System.out.println(wordTree.treeIncrement);
 //		
 //		System.out.println(charTree.treeIncrement);
 //		System.out.println(wordTree.treeIncrement);
-		//Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
+		Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 		//Database.constructTree(TreeType.WORDTREE);
 		//Database.constructTree(TreeType.CHARTREE);
@@ -104,7 +114,24 @@ public class Main {
 		
 
 	}
-	
+	public static int getTreeIncrement(TreeType t){
+		if(t == TreeType.CHARTREE){
+			return charTree.treeIncrement;
+		}
+		if(t == TreeType.WORDTREE){
+			return wordTree.treeIncrement;
+		}
+		return 0;
+	}
+	public static void setTreeIncrement(TreeType t,int i){
+		if(t == TreeType.CHARTREE){
+			charTree.treeIncrement = i;
+		}
+		if(t == TreeType.WORDTREE){
+			wordTree.treeIncrement = i;
+		}
+		
+	}
 	// dfs to display all nodes in tree debugging
 	public static void dfs(Node n) {
 		logNode(n);
