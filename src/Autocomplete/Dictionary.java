@@ -46,9 +46,11 @@ public class Dictionary extends Main {
 
 			// alphabetize each arraylist
 			for (int i = 0; i < this.content.size(); i++) {
-				ArrayList<String> alphabetized = alphabetize(this.content.get(i));
-				this.content.get(i).clear();
-				this.content.get(i).addAll(alphabetized);
+				// if array not empty
+				if (this.content.get(i).size() > 0) {
+					// alphabetize
+					radixAlphabetize(this.content.get(i));
+				}
 			}
 		}
 		
@@ -59,24 +61,50 @@ public class Dictionary extends Main {
 			System.out.println("Error reading file '" + filename + "'");
 		}
 	}
+	
+	// alphabetize an array of strings using radix MSD
+	public void radixAlphabetize(ArrayList<String> a) {
 
-	// alphabetize an arraylist of strings
-	public ArrayList<String> alphabetize(ArrayList<String> a) {
-		ArrayList<String> ordered = new ArrayList<String>();
+		// initialize working as 2d array with 1st dimension size 27
+		ArrayList<ArrayList<String>> working = new ArrayList<ArrayList<String>>();
+		for (int i = 0; i < 27; i++) {
+			working.add(new ArrayList<String>());
+		}
 
-		while (a.size() > 0) {
-			String first = a.get(0);
-			for (int i = 1; i < a.size(); i++) {
-				if (!alpha(first, a.get(i))) {
-					first = a.get(i);
+		// get max word length
+		int max = a.get(0).length();
+		for (int w = 0; w < a.size(); w++) {
+			if (a.get(w).length() > max) {
+				max = a.get(w).length();
+			}
+		}
+
+		// for every index in reverse from end of longest word
+		for (int index = max - 1; index >= 0; index--) {
+
+			// for every word in array
+			for (int w = 0; w < a.size(); w++) {
+				String word = a.get(w);
+
+				// if word long enough
+				if (index < word.length()) {
+					// add to proper bucket
+					working.get(alphabet.indexOf(word.charAt(index)) + 1).add(word);
+				} else {
+					// add to 0th bucket
+					working.get(0).add(word);
 				}
 			}
 
-			a.remove(a.indexOf(first));
-			ordered.add(first);
-		}
+			// clear array
+			a.clear();
 
-		return ordered;
+			// push in new order to a, and clear working
+			for (int i = 0; i < working.size(); i++) {
+				a.addAll(working.get(i));
+				working.get(i).clear();
+			}
+		}
 	}
 
 	// true if s1 before s2, false otherwise
@@ -150,3 +178,15 @@ public class Dictionary extends Main {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
