@@ -20,6 +20,4 @@ public class Node extends Tree {
 	public Node(String content) {
 		this.content = content;
 	}
-	
-
 }
