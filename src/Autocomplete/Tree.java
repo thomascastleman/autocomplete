@@ -6,8 +6,8 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	public static int treeIncrement;
-	TreeType type;
+	protected static int treeIncrement;
+	public TreeType type;
 	public Tree(){
 		
 	}

@@ -5,7 +5,7 @@ import java.util.*;
 public class Node extends Tree {
 	
 	public int id;
-	protected String content;
+	public String content;
 	public int probability = 1;
 	public Node parent; //public nodity 
 	public ArrayList<Node> children = new ArrayList<Node>();

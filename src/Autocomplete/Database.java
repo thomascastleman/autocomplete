@@ -32,11 +32,20 @@ class Database extends Main {
 			ResultSet rs = null;
 		
 			Node n = null;
+			int remoteTreeIncrement = 0;
 			if (t == TreeType.CHARTREE){
 				n = Main.charTree.origin;
+				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'charTree'"); 
+				while(rs.next()){
+					remoteTreeIncrement = rs.getInt("treeIncrement");
+				}
 			}
 			if (t == TreeType.WORDTREE){
 				n = Main.wordTree.origin;
+				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'wordTree'"); 
+				while(rs.next()){
+					remoteTreeIncrement = rs.getInt("treeIncrement");
+				}
 			}
 		
 			// queue for dfs
@@ -50,38 +59,49 @@ class Database extends Main {
 				// pop from queue
 				v = q.remove(q.size() - 1);
 				ArrayList<Integer> children = new ArrayList<Integer>();
-				
 				for (int ch = 0; ch < v.children.size(); ch++) {
-					// add to queue
-					
 					children.add(v.children.get(ch).id);
 					q.add(v.children.get(ch));
-					}
+				}
 				PreparedStatement pstmt= null;
-				if (t == TreeType.WORDTREE){
-				//	System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
-					pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
-					pstmt.setInt(1,v.id);
-					pstmt.setString(2,v.content);  
-					pstmt.setInt(3,v.probability);
-					pstmt.setString(4,Arrays.toString(children.toArray()));
-					pstmt.executeUpdate();
-				}
-				if (t == TreeType.CHARTREE){
-					System.out.println(v.content);
-					//System.out.println("id: "+v.id+" content: "+ v.content.charAt(0)+" children: "+ Arrays.toString(children.toArray()));
-					pstmt = con.prepareStatement("INSERT INTO `charTree` (`id`, `content`, `priority`, `isWord`, `children`) VALUES (?,?,?,?,?);");
-					pstmt.setInt(1,v.id);
-					pstmt.setString(2,v.content);  
-					pstmt.setInt(3,v.probability);
+				if (v.id > remoteTreeIncrement){
+					if (t == TreeType.WORDTREE){
+						pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
+						pstmt.setInt(1,v.id);
+						pstmt.setString(2,v.content);  
+						pstmt.setInt(3,v.probability);
+						pstmt.setString(4,Arrays.toString(children.toArray()));
+						pstmt.executeUpdate();
+					}
+					if (t == TreeType.CHARTREE){
+						System.out.println(v.content);
+						//System.out.println("id: "+v.id+" content: "+ v.content.charAt(0)+" children: "+ Arrays.toString(children.toArray()));
+						pstmt = con.prepareStatement("INSERT INTO `charTree` (`id`, `content`, `priority`, `isWord`, `children`) VALUES (?,?,?,?,?);");
+						pstmt.setInt(1,v.id);
+						pstmt.setString(2,v.content);  
+						pstmt.setInt(3,v.probability);
 		
-					pstmt.setBoolean(4,v.isWord);
-					pstmt.setString(5,Arrays.toString(children.toArray()));
-					pstmt.executeUpdate();
+						pstmt.setBoolean(4,v.isWord);
+						pstmt.setString(5,Arrays.toString(children.toArray()));
+						pstmt.executeUpdate();
+					}
 				}
-				
 					
 				}
+			
+			if (t == TreeType.CHARTREE){
+				String query = "UPDATE `treeData` SET `treeIncrement` = ? WHERE `treeData`.`treeName` = 'charTree';";
+				 PreparedStatement ps = con.prepareStatement(query);
+				 ps.setInt   (1, Main.charTree.treeIncrement);
+				 ps.executeUpdate();
+			}
+			if (t == TreeType.WORDTREE){
+				String query = "UPDATE `treeData` SET `treeIncrement` = ? WHERE `treeData`.`treeName` = 'wordTree';";
+				 PreparedStatement ps = con.prepareStatement(query);
+				 ps.setInt   (1, Main.wordTree.treeIncrement);
+				 ps.executeUpdate();
+			}
+			
 			}catch(Exception e){ 
 				System.out.println(e);
 			}  
@@ -96,14 +116,14 @@ class Database extends Main {
 			if (t == TreeType.CHARTREE){
 				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'charTree'"); 
 				while(rs.next()){
-					Main.charTree.treeIncrement = rs.getInt("treeIncrement");
+					Main.charTree.treeIncrement = rs.getInt("treeIncrement")+1;
 				}
 
 				rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
 			}else{
 				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'wordTree'"); 
 				while(rs.next()){
-					Main.charTree.treeIncrement = rs.getInt("treeIncrement");
+					Main.wordTree.treeIncrement = rs.getInt("treeIncrement")+1;
 				}
 				rs=stmt.executeQuery("SELECT * FROM `wordTree`");
 			}
@@ -146,8 +166,10 @@ class Database extends Main {
 			}
 			if (t == TreeType.CHARTREE){
 				Main.charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
+				
 			}else{
 				Main.wordTree.origin = searchForNodeWithId(1, nodes, null).get(0);
+				
 			}
 			//Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
 			//System.out.println(Arrays.toString(nodeChildren.get(nodes.get(2))));

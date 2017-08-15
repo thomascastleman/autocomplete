@@ -17,19 +17,29 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("beeMovie.txt");
+		rawTrainingData = readInRawData("beemovie.txt");
 		
-		//wordTree.train(wordTree.formatData(rawTrainingData));
-		//charTree.train(charTree.formatData(rawTrainingData));
 	//	System.out.println(charTree.origin.children.get(1).content);
+		//Database.constructTree(TreeType.CHARTREE);
+		//System.out.println(charTree.treeIncrement);
+		
+		//Database.constructTree(TreeType.WORDTREE);
+		//System.out.println(wordTree.treeIncrement);
+		charTree.train(charTree.formatData(rawTrainingData));
+		wordTree.train(wordTree.formatData(rawTrainingData));
 		System.out.println(charTree.treeIncrement);
-		Database.constructTree(TreeType.CHARTREE);
+		System.out.println(wordTree.treeIncrement);
+		
 		System.out.println(charTree.treeIncrement);
+		System.out.println(wordTree.treeIncrement);
+		//Database.uploadTreeToDatabase(TreeType.CHARTREE);
+		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 		//Database.constructTree(TreeType.WORDTREE);
+		//Database.constructTree(TreeType.CHARTREE);
 
 
-		String[] phi = {"You", "like","j"};
+		String[] phi = {"an", "All","St"};
 		ArrayList<Node> f = findCompletions(phi);
 		
 		for (int i = 0; i < f.size(); i++) {

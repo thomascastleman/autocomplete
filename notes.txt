@@ -46,3 +46,8 @@ LATER:
 - alphabetization with radix
 - work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
 
+Big error:
+
+the treeIncrement variable of the tree class is changed for both word and char tree objects on Super.treeIncrement++;
+
+
