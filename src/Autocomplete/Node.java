@@ -18,6 +18,9 @@ public class Node extends Tree {
 		this.isWord = isWord;
 }
 	public Node(String content) {
+		this.id = super.treeIncrement;
+		super.treeIncrement++;
+		
 		this.content = content;
 	}
 }

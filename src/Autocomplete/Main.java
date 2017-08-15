@@ -29,6 +29,7 @@ public class Main {
 			logNode(f.get(i));
 		}
 		
+		//	System.out.println(charTree.origin.id);
 		
 		// CHARTREE FORMAT DEBUGGING:
 //		for (int i = 0; i < 50; i++) {
@@ -50,14 +51,19 @@ public class Main {
 		
 		
 		
-		
-//		
 //		 Database.constructTree(TreeType.CHARTREE);
 //		 System.out.println(charTree.origin.content);
 //
 //		System.out.println(charTree.origin.children.get(0).content);
 //		System.out.println(charTree.origin.children.get(0).children.get(0).content);
 //		System.out.println(charTree.origin.children.get(1).content);
+		// Database.constructTree(TreeType.WORDTREE);
+		// System.out.println(wordTree.origin.children.get(0).content);
+		// Database.uploadTreeToDatabase(TreeType.WORDTREE);
+
+	//	System.out.println(wordTree.origin.content);
+		//System.out.println(charTree.origin.children.get(0).children.get(0).content);
+	//	System.out.println(charTree.origin.children.get(1).content);
 //		System.out.println(charTree.origin.children.get(2).content);
 //		
 //		
@@ -67,7 +73,6 @@ public class Main {
 //		System.out.println(wordTree.origin.children.get(1).content);
 //		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
 //		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
-	
 		
 		
 
