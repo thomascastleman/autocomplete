@@ -20,11 +20,12 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-//		rawTrainingData = readInRawData("MSND.txt");
-//		
-//		ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
-//		
-//		wordTree.train(formatted);
+	//	rawTrainingData = readInRawData("beeMovie.txt");
+		
+	//	ArrayList<ArrayList<String>> formatted = wordTree.formatData(rawTrainingData);
+		
+		//wordTree.train(formatted);
+		//System.out.println(wordTree.origin.id);
 //		// dfs(charTree.origin);
 //		
 //		// ArrayList<Node> searchResult = charTree.search(new ArrayList<String>(Arrays.asList("b", "e")));
@@ -56,22 +57,23 @@ public class Main {
 		
 		
 		
-		 Database.constructTree(TreeType.CHARTREE);
-		 System.out.println(charTree.origin.content);
+		 Database.constructTree(TreeType.WORDTREE);
+		 System.out.println(wordTree.origin.children.get(0).content);
+		// Database.uploadTreeToDatabase(TreeType.CHARTREE);
 
-		System.out.println(charTree.origin.children.get(0).content);
-		System.out.println(charTree.origin.children.get(0).children.get(0).content);
-		System.out.println(charTree.origin.children.get(1).content);
-		System.out.println(charTree.origin.children.get(2).content);
-		
-		
-		Database.constructTree(TreeType.WORDTREE);
-		System.out.println(wordTree.origin.content);
-		System.out.println(wordTree.origin.children.get(0).content);
-		System.out.println(wordTree.origin.children.get(1).content);
-		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
-		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
-	
+	//	System.out.println(wordTree.origin.content);
+		//System.out.println(charTree.origin.children.get(0).children.get(0).content);
+	//	System.out.println(charTree.origin.children.get(1).content);
+//		System.out.println(charTree.origin.children.get(2).content);
+//		
+//		
+//		Database.constructTree(TreeType.WORDTREE);
+//		System.out.println(wordTree.origin.content);
+//		System.out.println(wordTree.origin.children.get(0).content);
+//		System.out.println(wordTree.origin.children.get(1).content);
+//		System.out.println(wordTree.origin.children.get(0).children.get(0).content);
+//		System.out.println(wordTree.origin.children.get(1).children.get(0).content);
+//	
 		
 		
 

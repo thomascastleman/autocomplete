@@ -8,7 +8,7 @@ class Database extends Main {
 	public static Connection con = null;
 	public static void CreateConnection(){  
 		try{  
-			con=DriverManager.getConnection("jdbc:mysql://165.227.73.128/autocorrect?autoReconnect=true&useSSL=false","public","JFC-xNc-U2x-YqN");  
+			con=DriverManager.getConnection("jdbc:mysql://165.227.73.128/autocorrect_testing?autoReconnect=true&useSSL=false","public","JFC-xNc-U2x-YqN");  
 //			//constructTree(con, TreeType.WORDTREE);
 //			Statement stmt=con.createStatement();  
 //			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
@@ -25,7 +25,59 @@ class Database extends Main {
 			System.out.println(e);
 		}  
 	}  
-
+	public static void uploadTreeToDatabase(TreeType t) {
+		CreateConnection();
+		try{ 
+			Statement stmt=con.createStatement();
+			ResultSet rs = null;
+		
+			Node n = null;
+			if (t == TreeType.CHARTREE){
+				n = Main.charTree.origin;
+			}
+			if (t == TreeType.CHARTREE){
+				n = Main.wordTree.origin;
+			}
+		
+			// queue for dfs
+			ArrayList<Node> q = new ArrayList<Node>();
+		
+			q.add(n);
+			Node v;
+		
+			// while queue size > 0
+			while (q.size() > 0) {
+				// pop from queue
+				v = q.remove(q.size() - 1);
+				ArrayList<Integer> children = new ArrayList<Integer>();
+				//System.out.println(v.children);
+				// add to word nodes if word
+				// for all children
+				
+				for (int ch = 0; ch < v.children.size(); ch++) {
+					// add to queue
+					
+					children.add(v.children.get(ch).id);
+					//Boolean r=stmt.execute("INSERT INTO `autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
+					q.add(v.children.get(ch));
+					}
+				System.out.println("id: "+v.id+" content: "+ v.content+" children: "+ Arrays.toString(children.toArray()));
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO `wordTree` (`id`, `content`, `priority`, `children`) VALUES (?,?,?,?);");
+				pstmt.setInt(1,v.id);
+				pstmt.setString(2,v.content);  
+				pstmt.setInt(3,v.probability);
+				pstmt.setString(4,Arrays.toString(children.toArray()));
+				
+				pstmt.executeUpdate();
+				
+			
+			}
+			}catch(Exception e){ 
+				System.out.println(e);
+			}  
+		
+		}
+	
 	public static void constructTree(TreeType t){
 		CreateConnection();
 		try{ 
@@ -36,27 +88,32 @@ class Database extends Main {
 			}else{
 				rs=stmt.executeQuery("SELECT * FROM `wordTree`");
 			}
+			
 			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
 			ArrayList<Node> nodes = new ArrayList<Node>();
+			
 			while(rs.next()){
+				
 				Node n = null;
+				
 				if (t == TreeType.CHARTREE){
 					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"), rs.getBoolean("isWord"));
+					
 				}else{
 					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
 				}
+				
 				nodes.add(n);
-				String childString = rs.getString("children");
-				if (childString!=null){
-					String[] childrenStringArray = childString.split(",");
-					int[] childrenIntArray = new int[childrenStringArray.length];
-					for(int i = 0; i<childrenStringArray.length; i++) {
-						childrenIntArray[i] = Integer.parseInt(childrenStringArray[i]);
-					}
-					nodeChildren.put(n, childrenIntArray);
-				}else{
-					nodeChildren.put(n, null);
-					}
+				String a = rs.getString("children");
+				a = a.substring(1, a.length()-1);
+				int[] children = null;
+				if (a.length()>0){
+				//System.out.println(a);
+				children = stringArrayToIntArray(a);
+				}
+				
+				nodeChildren.put(n, children);
+				
 			} 
 			
 			for(int i = 0; i<nodes.size(); i++) {
@@ -84,6 +141,15 @@ class Database extends Main {
 	
 	}
 	
+	public static int[] stringArrayToIntArray(String intString) {
+	    String[] intStringSplit = intString.split(", "); 
+	    int[] result = new int[intStringSplit.length]; 
+	    for (int i = 0; i < intStringSplit.length; i++) {
+	    	//System.out.println(i);
+	        result[i] = Integer.parseInt(intStringSplit[i]); 
+	    }
+	    return result;
+	}
 	
 	public static void constructWordTree(Connection con){
 		try{  
