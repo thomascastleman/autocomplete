@@ -6,7 +6,7 @@ import java.util.*;
 public class Main {
  
 	public static int ngram = 4;													// length of highest ngram
-	public static int numCompletions = 5;											// number of completions returned by findCompletion()
+	public static int numCompletions = 7;											// number of completions returned by findCompletion()
 	public enum TreeType{WORDTREE,CHARTREE};										// enum to determine tree type
 
 	public static String rawTrainingData;											// training data as single string
@@ -22,10 +22,9 @@ public class Main {
 		charTree.train(charTree.formatData(rawTrainingData));
 		wordTree.train(wordTree.formatData(rawTrainingData));
 		
-
-		String[] phi = {"You"};
+		String[] phi = {"You", "like", "ja"};
 		ArrayList<Node> f = findCompletions(phi);
-		System.out.println("\nCompletions: ");
+		System.out.println("\nTop " + numCompletions + " Completions: ");
 		for (int i = 0; i < f.size(); i++) {
 			logNode(f.get(i));
 		}
@@ -136,13 +135,19 @@ public class Main {
 		if (n.parent != null) {
 			System.out.print("parent: \"" + n.parent.content + "\" ");
 		}
-		System.out.print("children: ");
+		System.out.print("children: (" + n.children.size() + ")");
 		for (int i = 0; i < n.children.size(); i++) {
-			System.out.print(n.children.get(i).content + " ");
+			System.out.print(" " + n.children.get(i).content);
 		}
 	}
 
 	public static ArrayList<Node> findCompletions(String[] error) {
+		
+		// remove capitalization
+		for (int i = 0; i < error.length; i++) {
+			error[i] = error[i].toLowerCase();
+		}
+		
 		String lastWord = error[error.length - 1];
 		
 		// if word exists in dictionary
@@ -235,8 +240,9 @@ public class Main {
 				if (a.get(aNode).content.equals(b.get(bNode).content)) {
 					// initialize new node with same content
 					Node combined = new Node(a.get(aNode).content);
-					// sum probabilities
-					combined.probability = a.get(aNode).probability + b.get(bNode).probability;
+					
+					// multiply probabilities
+					combined.probability = a.get(aNode).probability * b.get(bNode).probability;
 					
 					both.add(combined);
 				}

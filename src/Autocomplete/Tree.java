@@ -2,6 +2,9 @@
 package Autocomplete;
 
 import java.util.*;
+
+import Autocomplete.Main.TreeType;
+
 import java.io.*;
 
 public class Tree extends Main {
@@ -82,8 +85,6 @@ public class Tree extends Main {
 		}
 		
 		System.out.println("Lowest node \"" + current.content + "\" found");
-		logNode(current);
-		System.out.println("\n");
 		
 		// if wordtree, return immediate children
 		if (this.type == TreeType.WORDTREE) {
@@ -92,11 +93,12 @@ public class Tree extends Main {
 		// chartree requires additional searching to find possible complete word completions of current node
 		} else if (this.type == TreeType.CHARTREE) {
 			ArrayList<Node> isWordNodes = this.getAllCompletedChildren(current);
+			
 			ArrayList<Node> completedNodes = new ArrayList<Node>();
 			
 			for (int n = 0; n < isWordNodes.size(); n++) {
-				// update node content to reflect whole word
 				
+				// update node content to reflect whole word
 				Node node = new Node(this.getWholeWord(isWordNodes.get(n)), this.type);
 				node.probability = isWordNodes.get(n).probability;
 				completedNodes.add(node);
@@ -209,6 +211,7 @@ public class Tree extends Main {
 				
 				// if clause not empty
 				if (words.size() != 0) {
+					words.set(0, words.get(0).toLowerCase());
 					formatted.add(new ArrayList<String>());
 					formatted.get(formatted.size() - 1).addAll(words);
 				}
@@ -279,6 +282,12 @@ public class Tree extends Main {
 					if (child.content.equals(s)) {
 						n = child;			// move to that child
 						n.probability++;	// update probability
+						
+						// if at end of word, isWord is true
+						if (str == section.size() - 1) {
+							n.isWord = true;
+						}
+						
 						break;
 					}
 				}
