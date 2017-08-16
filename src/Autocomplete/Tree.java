@@ -82,6 +82,8 @@ public class Tree extends Main {
 		}
 		
 		System.out.println("Lowest node \"" + current.content + "\" found");
+		logNode(current);
+		System.out.println("\n");
 		
 		// if wordtree, return immediate children
 		if (this.type == TreeType.WORDTREE) {
@@ -170,37 +172,42 @@ public class Tree extends Main {
 		if (this.type == TreeType.CHARTREE) {
 			String[] temp = trainingData.split(" ");
 
+			// for every word
 			for (int i = 0; i < temp.length; i++) {
-				formatted.add(new ArrayList<String>());
-			}
-
-			for (int i = 0; i < temp.length; i++) {
-				formatted.get(i).add(temp[i].replaceAll("\\W", ""));
-			}
-			
-			// remove excess empty string
-			if (formatted.size() > 0) {
-				formatted.remove(0);
+				// remove everything but alphanumeric chars and apostrophes
+				String f = temp[i].replaceAll("[^\\w\\']", "");
+				
+				// comb for empty strings
+				if (!f.equals("")) {
+					formatted.add(new ArrayList<String>());
+					formatted.get(formatted.size() - 1).add(f);
+				}
 			}
 
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
 			
-			// NEED TO CLEAN DATA MORE !!
-			
-			String[] clauses = trainingData.split("\\.|\\,|\\?|\\!");
+			String[] clauses = trainingData.split("[\\.\\,\\?\\!]");
 
 			for (int c = 0; c < clauses.length; c++) {
 				
-				clauses[c] = (clauses[c].replaceAll("\\s{2,}", " ")).replaceAll("[^\\w\\s\\']", "");
-				
+				// split clause by whitespace
 				ArrayList<String> words = new ArrayList<String>(Arrays.asList(clauses[c].split(" ")));
 				
-				if (words.size() != 0) {
-					words.remove(0);
+				for (int i = 0; i < words.size(); i++) {
+
+					// strip strings
+					words.set(i, words.get(i).replaceAll("[^\\w\\']", ""));
+					
+					// remove empty strings
+					if (words.get(i).equals("")) {
+						words.remove(i);
+						i--;
+					}
 				}
 				
+				// if clause not empty
 				if (words.size() != 0) {
 					formatted.add(new ArrayList<String>());
 					formatted.get(formatted.size() - 1).addAll(words);

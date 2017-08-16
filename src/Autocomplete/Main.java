@@ -17,13 +17,26 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("textFiles\\training\\MSND.txt");
-		
+		rawTrainingData = readInRawData("textFiles\\training\\beeMovie.txt");
 		
 		charTree.train(charTree.formatData(rawTrainingData));
 		wordTree.train(wordTree.formatData(rawTrainingData));
 		
-	//	System.out.println(charTree.origin.children.get(1).content);
+
+		String[] phi = {"You"};
+		ArrayList<Node> f = findCompletions(phi);
+		System.out.println("\nCompletions: ");
+		for (int i = 0; i < f.size(); i++) {
+			logNode(f.get(i));
+		}
+		
+		
+		
+
+		// DATABASE DEBUGING:
+		
+		
+		//	System.out.println(charTree.origin.children.get(1).content);
 //		System.out.println(charTree.type);
 //		Database.constructTree(TreeType.CHARTREE);
 //		System.out.println(charTree.treeIncrement);
@@ -53,63 +66,6 @@ public class Main {
 		//Database.constructTree(TreeType.CHARTREE);
 		
 		// System.out.println(charTree.origin.children);
-
-		String[] phi = {"You"};
-		ArrayList<Node> f = findCompletions(phi);
-		System.out.println("\nCompletions: ");
-		for (int i = 0; i < f.size(); i++) {
-			logNode(f.get(i));
-		}
-		
-//		// Test with prediction
-//		String correction = f.get(0).content;
-//		phi[phi.length - 1] = correction;
-//		
-//		ArrayList<String> t = new ArrayList<String>(Arrays.asList(phi));
-//		
-//		int depth = 5;
-//		for (int i = 0; i < depth; i++) {
-//			ArrayList<String> lastNgram;
-//			if (t.size() >= ngram - 1) {
-//				lastNgram = new ArrayList<String>(t.subList(t.size() - (ngram - 1), t.size()));
-//			} else {
-//				lastNgram = t;
-//			}
-//			ArrayList<Node> prediction = wordTree.search(lastNgram);
-//			if (prediction.size() > 0) {
-//				t.add(prediction.get(0).content);
-//			}
-//			
-//			System.out.println(t);
-//		}
-		
-		
-	
-		
-		
-		
-		
-		//	System.out.println(charTree.origin.id);
-		
-		// CHARTREE FORMAT DEBUGGING:
-//		for (int i = 0; i < 50; i++) {
-//			System.out.println(test.get(i).get(0));
-//		}
-
-		// WORDTREE FORMAT DEBUGGING:
-//		for (int i = 0; i < 100; i++) {
-//		 	System.out.print("\nClause " + i + ": [");
-//		 	for (int w = 0; w < test.get(i).size(); w++) {
-//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
-//		 	}
-//		 	System.out.print("]");
-//		 }
-		
-		
-		
-		
-		
-		
 		
 //		 Database.constructTree(TreeType.CHARTREE);
 //		 System.out.println(charTree.origin.content);
@@ -156,7 +112,7 @@ public class Main {
 		return 0;
 	}
 	
-	public static void setTreeIncrement(TreeType t,int i){
+	public static void setTreeIncrement(TreeType t, int i){
 		if(t == TreeType.CHARTREE){
 			charTree.treeIncrement = i;
 		}
@@ -246,16 +202,6 @@ public class Main {
 			System.out.print("\n");
 			System.out.println(charCompletions.size() + " character completions found");
 			System.out.println(wordCompletions.size() + " word completions found");
-			
-//			System.out.println("\n\nChar completions: ");
-//			for (int i = 0; i < charCompletions.size(); i++) {
-//				logNode(charCompletions.get(i));
-//			}
-//			
-//			System.out.println("\n\nWord completions: ");
-//			for (int i = 0; i < wordCompletions.size(); i++) {
-//				logNode(wordCompletions.get(i));
-//			}
 			
 			ArrayList<Node> intersection = intersect(charCompletions, wordCompletions);
 			
@@ -364,7 +310,6 @@ class ProbabilityComparator implements Comparator<Node> {
 			return 0;
 		}
 	}
-	
 }
 
 
