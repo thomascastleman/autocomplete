@@ -10,6 +10,7 @@ public class Main {
 	public enum TreeType{WORDTREE,CHARTREE};										// enum to determine tree type
 
 	public static String rawTrainingData;											// training data as single string
+	public static String fileSeparator = System.getProperty("file.separator");
 	public static Dictionary dictionary = new Dictionary("textFiles/dictionary.txt"); 		// dictionary, organized by word length and alphabetized
 	
 	// TREES
@@ -17,6 +18,7 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
+		
 		rawTrainingData = readInRawData("textFiles/training/beeMovie.txt");
 		
 		charTree.train(charTree.formatData(rawTrainingData));

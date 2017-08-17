@@ -12,6 +12,8 @@ public class Dictionary extends Main {
 	public ArrayList<ArrayList<String>> content = new ArrayList<ArrayList<String>>();
 
 	public Dictionary(String filename) {
+		filename = filename.replaceAll("/", fileSeparator);//universal system paths 
+		System.out.println(filename);
 
 		String line = null;
 		ArrayList<String> words = new ArrayList<String>();
