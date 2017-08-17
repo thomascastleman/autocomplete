@@ -31,9 +31,10 @@ public class Main {
 
 		//wordTree.treeIncrement++;
 		//Database.constructTree(TreeType.WORDTREE);
-		//System.out.println(wordTree.treeIncrement);
+		System.out.println(wordTree.treeIncrement);
 		wordTree.train(wordTree.formatData(rawTrainingData));
-		//System.out.println(wordTree.origin.id);
+		
+		System.out.println(wordTree.origin.id);
 		
 		//charTree.train(charTree.formatData(rawTrainingData));
 //		wordTree.train(wordTree.formatData(rawTrainingData));
@@ -42,8 +43,8 @@ public class Main {
 //		
 //		System.out.println(charTree.treeIncrement);
 //		System.out.println(wordTree.treeIncrement);
+		Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
-		Database.uploadTreeToDatabase(TreeType.WORDTREE);
 
 		//Database.constructTree(TreeType.WORDTREE);
 		//Database.constructTree(TreeType.CHARTREE);
