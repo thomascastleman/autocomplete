@@ -40,12 +40,9 @@ chartree: ["w", "i", "n", "d", "o"]
 _____________________________________________________________________
 
 LATER:
-- find new dictionary, larger but not too large
-- amass training data
 
-- work on training data formatting (clearing whitespace, stripping strings, removing all beginning capitalization)
-- need to account for the fact that all char nodes are weighted heavier than word nodes, as chars occur
-more frequently than words
+- find new dictionary, larger but not too large (?)
+- amass training data
 
 Big error:
 

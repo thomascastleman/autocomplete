@@ -39,6 +39,7 @@ public class Main {
 		ArrayList<Node> f = findCompletions(phi);
 
 		System.out.println("\nTop " + numCompletions + " Completions: ");
+		
 		for (int i = 0; i < f.size(); i++) {
 			logNode(f.get(i));
 		}
@@ -86,6 +87,58 @@ public class Main {
 		//Database.constructTree(TreeType.CHARTREE);
 		
 		// System.out.println(charTree.origin.children);
+
+//		String[] phi = {"You", "l"};
+//		ArrayList<Node> f = findCompletions(phi);
+//		System.out.println("\nCompletions: ");
+//		for (int i = 0; i < f.size(); i++) {
+//			logNode(f.get(i));
+//		}
+		
+//		// Test with prediction
+//		String correction = f.get(0).content;
+//		phi[phi.length - 1] = correction;
+//		
+//		ArrayList<String> t = new ArrayList<String>(Arrays.asList(phi));
+//		
+//		int depth = 5;
+//		for (int i = 0; i < depth; i++) {
+//			ArrayList<String> lastNgram;
+//			if (t.size() >= ngram - 1) {
+//				lastNgram = new ArrayList<String>(t.subList(t.size() - (ngram - 1), t.size()));
+//			} else {
+//				lastNgram = t;
+//			}
+//			ArrayList<Node> prediction = wordTree.search(lastNgram);
+//			if (prediction.size() > 0) {
+//				t.add(prediction.get(0).content);
+//			}
+//			
+//			System.out.println(t);
+//		}
+		
+		
+	
+		
+		
+		
+		
+		//	System.out.println(charTree.origin.id);
+		
+		// CHARTREE FORMAT DEBUGGING:
+//		for (int i = 0; i < 50; i++) {
+//			System.out.println(test.get(i).get(0));
+//		}
+
+		// WORDTREE FORMAT DEBUGGING:
+//		for (int i = 0; i < 100; i++) {
+//		 	System.out.print("\nClause " + i + ": [");
+//		 	for (int w = 0; w < test.get(i).size(); w++) {
+//		 		System.out.print("\"" + test.get(i).get(w) + "\" ");
+//		 	}
+//		 	System.out.print("]");
+//		 }
+		
 		
 //		 Database.constructTree(TreeType.CHARTREE);
 //		 System.out.println(charTree.origin.content);
