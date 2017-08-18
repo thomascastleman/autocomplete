@@ -17,7 +17,7 @@ public class Main {
 	public static Tree charTree = new Tree(TreeType.CHARTREE);
 
 	public static void main(String[] args) {
-		rawTrainingData = readInRawData("textFiles\\training\\MSND.txt");
+		rawTrainingData = readInRawData("textFiles\\training\\beeMovie.txt");
 		
 		
 		charTree.train(charTree.formatData(rawTrainingData));
@@ -54,12 +54,12 @@ public class Main {
 		
 		// System.out.println(charTree.origin.children);
 
-		String[] phi = {"You"};
-		ArrayList<Node> f = findCompletions(phi);
-		System.out.println("\nCompletions: ");
-		for (int i = 0; i < f.size(); i++) {
-			logNode(f.get(i));
-		}
+//		String[] phi = {"You", "l"};
+//		ArrayList<Node> f = findCompletions(phi);
+//		System.out.println("\nCompletions: ");
+//		for (int i = 0; i < f.size(); i++) {
+//			logNode(f.get(i));
+//		}
 		
 //		// Test with prediction
 //		String correction = f.get(0).content;
