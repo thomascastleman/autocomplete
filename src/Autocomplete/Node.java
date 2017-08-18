@@ -12,6 +12,7 @@ public class Node extends Tree {
 	public boolean isWord;
 
 	public Node(int id, String content, int probability, boolean isWord) {
+	
 		this.id = id;
 		this.probability = probability;
 		this.content = content;
@@ -20,12 +21,15 @@ public class Node extends Tree {
 	
 	public Node(String content) {
 		this.content = content;
-		this.id = 0;
+		this.id = 1;
 	}
+	
+
 	
 	public Node(String content, TreeType t) {
 			this.id = getTreeIncrement(t);
 			setTreeIncrement(t, this.id+1);
+		
 		
 		
 		this.content = content;

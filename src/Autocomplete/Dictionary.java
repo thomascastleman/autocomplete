@@ -13,7 +13,6 @@ public class Dictionary extends Main {
 
 	public Dictionary(String filename) {
 		filename = filename.replaceAll("/", fileSeparator);//universal system paths 
-		System.out.println(filename);
 
 		String line = null;
 		ArrayList<String> words = new ArrayList<String>();

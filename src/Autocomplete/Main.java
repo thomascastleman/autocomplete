@@ -19,17 +19,31 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		rawTrainingData = readInRawData("textFiles/training/beeMovie.txt");
-		
+		rawTrainingData = readInRawData("textFiles/training/MSND.txt");
 		charTree.train(charTree.formatData(rawTrainingData));
 		wordTree.train(wordTree.formatData(rawTrainingData));
+		rawTrainingData = readInRawData("textFiles/training/beeMovie.txt");
+		charTree.train(charTree.formatData(rawTrainingData));
+		wordTree.train(wordTree.formatData(rawTrainingData));
+
+	//	Database.constructTree(TreeType.WORDTREE);
+	//	Database.constructTree(TreeType.CHARTREE);
+
+		//wordTree.train(wordTree.formatData(rawTrainingData));
+		//System.out.println(charTree.treeIncrement);
+		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
+		//charTree.train(charTree.formatData(rawTrainingData));
+		//Database.uploadTreeToDatabase(TreeType.CHARTREE);
 		
-		String[] phi = {"You", "like", "ja"};
+		String[] phi = {"for","anoth"};
 		ArrayList<Node> f = findCompletions(phi);
+
 		System.out.println("\nTop " + numCompletions + " Completions: ");
 		for (int i = 0; i < f.size(); i++) {
 			logNode(f.get(i));
 		}
+//		
+		
 		
 		
 		
@@ -37,7 +51,7 @@ public class Main {
 		// DATABASE DEBUGING:
 		
 		
-		//	System.out.println(charTree.origin.children.get(1).content);
+		//	
 //		System.out.println(charTree.type);
 //		Database.constructTree(TreeType.CHARTREE);
 //		System.out.println(charTree.treeIncrement);
@@ -226,7 +240,6 @@ public class Main {
 			System.out.println(result.size() + " completions after union and relative complement");
 			
 			Collections.sort(result, new ProbabilityComparator());
-			
 			if (numCompletions < result.size()) {
 				return new ArrayList<Node>(result.subList(0, numCompletions));
 			} else {
@@ -246,7 +259,7 @@ public class Main {
 				// if same content
 				if (a.get(aNode).content.equals(b.get(bNode).content)) {
 					// initialize new node with same content
-					Node combined = new Node(a.get(aNode).content);
+					Node combined = new Node(a.get(aNode).content);// this effects treeIncrement
 					
 					// multiply probabilities
 					combined.probability = a.get(aNode).probability * b.get(bNode).probability;

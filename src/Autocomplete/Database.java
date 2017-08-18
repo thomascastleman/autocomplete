@@ -8,7 +8,7 @@ class Database extends Main {
 	public static Connection con = null;
 	public static void CreateConnection(){  
 		try{  
-			con=DriverManager.getConnection("jdbc:mysql://165.227.73.128/autocorrect_testing?autoReconnect=true&useSSL=false","public","JFC-xNc-U2x-YqN");  
+			con=DriverManager.getConnection("jdbc:mysql://165.227.73.128/autocomplete?autoReconnect=true&useSSL=false","public","JFC-xNc-U2x-YqN");  
 //			//constructTree(con, TreeType.WORDTREE);
 //			Statement stmt=con.createStatement();  
 //			//Boolean r=stmt.execute("INSERT INTO `jlindber_autocomplete`.`charTree` (`address`, `content`, `priority`, `isWord`, `children`) VALUES (NULL, 't', '0', '1', NULL);"); 
@@ -112,6 +112,7 @@ class Database extends Main {
 	
 	public static void constructTree(TreeType t){
 		CreateConnection();
+		Boolean ResultSetHasData = false;
 		try{ 
 			Statement stmt=con.createStatement();
 			ResultSet rs = null;
@@ -122,19 +123,20 @@ class Database extends Main {
 				}
 
 				rs=stmt.executeQuery("SELECT * FROM `charTree`"); 
+
 			}else{
 				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'wordTree'"); 
 				while(rs.next()){
 					Main.wordTree.treeIncrement = rs.getInt("treeIncrement")+1;
 				}
-				rs=stmt.executeQuery("SELECT * FROM `wordTree`");
+			rs=stmt.executeQuery("SELECT * FROM `wordTree`");
 			}
 			
 			HashMap<Node,int[]> nodeChildren =new HashMap<Node,int[]>(); 
 			ArrayList<Node> nodes = new ArrayList<Node>();
-			
+		
 			while(rs.next()){
-				
+				ResultSetHasData = true;
 				Node n = null;
 				
 				if (t == TreeType.CHARTREE){
@@ -145,7 +147,6 @@ class Database extends Main {
 					
 					n = new Node(rs.getInt("id"), rs.getString("content"),rs.getInt("priority"),false);
 				}
-				
 				nodes.add(n);
 				String a = rs.getString("children");
 				if (a != null){
@@ -159,31 +160,36 @@ class Database extends Main {
 				}
 				
 			} 
-			
-			for(int i = 0; i<nodes.size(); i++) {
+			if (ResultSetHasData){
+				for(int i = 0; i<nodes.size(); i++) {
 
-				int[] c = nodeChildren.get(nodes.get(i));
+					int[] c = nodeChildren.get(nodes.get(i));
 
-				if (c != null){
+					if (c != null){
 
-					for(int child = 0; child<c.length; child++) {
+						for(int child = 0; child<c.length; child++) {
 
-						nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes, nodes.get(i)));
+							nodes.get(i).children.addAll(searchForNodeWithId(c[child], nodes, nodes.get(i)));
 
-						//System.out.println(child);
+							//System.out.println(child);
+						}
 					}
 				}
 			}
 			//System.out.println("1");
+			if (ResultSetHasData){
+				if (t == TreeType.CHARTREE){
 
-			if (t == TreeType.CHARTREE){
+					charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
 
-				charTree.origin = searchForNodeWithId(1, nodes, null).get(0);
+				}else{
 				
-			}else{
-
-				wordTree.origin = searchForNodeWithId(17887, nodes, null).get(0);
+					wordTree.origin = searchForNodeWithId(1, nodes, null).get(0);
 				
+				}
+			}
+			if (!ResultSetHasData){
+				System.out.println(t+" does not contain tree");
 			}
 
 			//Main.charTree.origin = searchForNodeWithId(1, nodes).get(0);
@@ -209,12 +215,10 @@ class Database extends Main {
 	
 	
 	public static ArrayList<Node> searchForNodeWithId(int id, ArrayList<Node> n, Node parent){
-		System.out.println("1");
 
 		ArrayList<Node> f = new ArrayList<Node>();
-		System.out.println("2");
+		
 		if (n != null){
-			
 		for(int i = 0; i<n.size()-1; i++) {
 		//	System.out.println("3");
 

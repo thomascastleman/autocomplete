@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	public int treeIncrement = 0;
+	public int treeIncrement = 2;//origin is 1
 	TreeType type;
 	
 	public Tree(){
