@@ -109,7 +109,7 @@ class Database extends Main {
 			}  
 		
 		}
-	
+	 
 	public static void constructTree(TreeType t){
 		CreateConnection();
 		Boolean ResultSetHasData = false;

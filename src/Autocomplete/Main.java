@@ -28,7 +28,7 @@ public class Main {
 
 	//	Database.constructTree(TreeType.WORDTREE);
 	//	Database.constructTree(TreeType.CHARTREE);
-
+		
 		//wordTree.train(wordTree.formatData(rawTrainingData));
 		//System.out.println(charTree.treeIncrement);
 		//Database.uploadTreeToDatabase(TreeType.WORDTREE);
