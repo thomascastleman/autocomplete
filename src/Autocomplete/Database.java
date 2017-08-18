@@ -32,7 +32,7 @@ class Database extends Main {
 			ResultSet rs = null;
 		
 			Node n = null;
-			int remoteTreeIncrement = 0;
+			int remoteTreeIncrement = -1;
 			if (t == TreeType.CHARTREE){
 				n = Main.charTree.origin;
 				rs=stmt.executeQuery("SELECT `treeIncrement` FROM `treeData` WHERE `treeName` = 'charTree'"); 
@@ -46,6 +46,7 @@ class Database extends Main {
 				while(rs.next()){
 					remoteTreeIncrement = rs.getInt("treeIncrement");
 				}
+					System.out.println(remoteTreeIncrement);
 			}
 		
 			// queue for dfs

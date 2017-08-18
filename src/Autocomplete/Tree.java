@@ -2,11 +2,14 @@
 package Autocomplete;
 
 import java.util.*;
+
+import Autocomplete.Main.TreeType;
+
 import java.io.*;
 
 public class Tree extends Main {
 	Node origin = null;
-	public int treeIncrement = 1;
+	public int treeIncrement = 0;
 	TreeType type;
 	
 	public Tree(){
@@ -90,11 +93,12 @@ public class Tree extends Main {
 		// chartree requires additional searching to find possible complete word completions of current node
 		} else if (this.type == TreeType.CHARTREE) {
 			ArrayList<Node> isWordNodes = this.getAllCompletedChildren(current);
+			
 			ArrayList<Node> completedNodes = new ArrayList<Node>();
 			
 			for (int n = 0; n < isWordNodes.size(); n++) {
-				// update node content to reflect whole word
 				
+				// update node content to reflect whole word
 				Node node = new Node(this.getWholeWord(isWordNodes.get(n)), this.type);
 				node.probability = isWordNodes.get(n).probability;
 				completedNodes.add(node);
@@ -170,38 +174,44 @@ public class Tree extends Main {
 		if (this.type == TreeType.CHARTREE) {
 			String[] temp = trainingData.split(" ");
 
+			// for every word
 			for (int i = 0; i < temp.length; i++) {
-				formatted.add(new ArrayList<String>());
-			}
-
-			for (int i = 0; i < temp.length; i++) {
-				formatted.get(i).add(temp[i].replaceAll("\\W", ""));
-			}
-			
-			// remove excess empty string
-			if (formatted.size() > 0) {
-				formatted.remove(0);
+				// remove everything but alphanumeric chars and apostrophes
+				String f = temp[i].replaceAll("[^\\w\\']", "");
+				
+				// comb for empty strings
+				if (!f.equals("")) {
+					formatted.add(new ArrayList<String>());
+					formatted.get(formatted.size() - 1).add(f);
+				}
 			}
 
 			return formatted;
 
 		} else if (this.type == TreeType.WORDTREE) {
 			
-			// NEED TO CLEAN DATA MORE !!
-			
-			String[] clauses = trainingData.split("\\.|\\,|\\?|\\!");
+			String[] clauses = trainingData.split("[\\.\\,\\?\\!]");
 
 			for (int c = 0; c < clauses.length; c++) {
 				
-				clauses[c] = (clauses[c].replaceAll("\\s{2,}", " ")).replaceAll("[^\\w\\s\\']", "");
-				
+				// split clause by whitespace
 				ArrayList<String> words = new ArrayList<String>(Arrays.asList(clauses[c].split(" ")));
 				
-				if (words.size() != 0) {
-					words.remove(0);
+				for (int i = 0; i < words.size(); i++) {
+
+					// strip strings
+					words.set(i, words.get(i).replaceAll("[^\\w\\']", ""));
+					
+					// remove empty strings
+					if (words.get(i).equals("")) {
+						words.remove(i);
+						i--;
+					}
 				}
 				
+				// if clause not empty
 				if (words.size() != 0) {
+					words.set(0, words.get(0).toLowerCase());
 					formatted.add(new ArrayList<String>());
 					formatted.get(formatted.size() - 1).addAll(words);
 				}
@@ -272,6 +282,12 @@ public class Tree extends Main {
 					if (child.content.equals(s)) {
 						n = child;			// move to that child
 						n.probability++;	// update probability
+						
+						// if at end of word, isWord is true
+						if (str == section.size() - 1) {
+							n.isWord = true;
+						}
+						
 						break;
 					}
 				}

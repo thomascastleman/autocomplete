@@ -20,7 +20,7 @@ public class Node extends Tree {
 	
 	public Node(String content) {
 		this.content = content;
-		this.id = 1;
+		this.id = 0;
 	}
 	
 	public Node(String content, TreeType t) {
